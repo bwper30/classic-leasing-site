@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-wide" viewBox="0 0 900 344" width="900" height="344" role="img" aria-labelledby="clf11wt clf11wd"><title id="clf11wt">When the employee leaves</title><desc id="clf11wd">The novation ends, deductions stop, the balance is refunded through payroll and taxed on the way out, and the lease returns to the employee.</desc><style>
+  .clf-wide .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-wide .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-wide .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-wide .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-wide .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-wide .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-wide text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-wide .clf-eb{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-ebo{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-lb{font-size:17px;font-weight:700}
+  .clf-wide .clf-md{font-size:15px}
+  .clf-wide .clf-sb{font-size:13.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-nt{font-size:15px}
+  .clf-wide .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-md" x="150" y="108" text-anchor="middle">The novation ends</text><text class="clf-md" x="348" y="108" text-anchor="middle">Your deductions stop</text><text class="clf-sb" x="348" y="202" text-anchor="middle">obligations stop too</text><text class="clf-md" x="546" y="108" text-anchor="middle">The balance is refunded</text><text class="clf-md" x="546" y="128" text-anchor="middle">through payroll</text><text class="clf-sb" x="546" y="202" text-anchor="middle">taxed on the way out</text><text class="clf-md" x="744" y="108" text-anchor="middle">The lease goes back</text><text class="clf-md" x="744" y="128" text-anchor="middle">to the employee</text><text class="clf-sb" x="744" y="202" text-anchor="middle">they deal with us</text><path class="clf-s" d="M56 160 H844"/><path class="clf-h" d="M150 152 V168"/><path class="clf-h" d="M348 152 V168"/><path class="clf-h" d="M546 152 V168"/><path class="clf-h" d="M744 152 V168"/><path class="clf-oxs" d="M645 128 V188"/><text class="clf-ebo" x="645" y="240" text-anchor="middle">YOUR INVOLVEMENT ENDS HERE</text><path class="clf-h" d="M56 286 H844"/><text class="clf-nt" x="56" y="310">The novation ends. Your deductions stop and your obligations stop with them.</text><text class="clf-nt" x="56" y="330">Anything left in the balance is refunded through payroll, and taxed on the way out.</text><text class="clf-cp" x="844" y="310" text-anchor="end">FIG. 11</text></svg>

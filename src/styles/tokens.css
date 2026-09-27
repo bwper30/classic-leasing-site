@@ -1,0 +1,39 @@
+/* Classic Leasing tokens. Generated from the design system's tokens.json — do not edit by hand. */
+:root, [data-theme="paper"] {
+  --cl-paper: #F4F1EA;
+  --cl-card: #FFFFFF;
+  --cl-ink: #1C1A17;
+  --cl-muted: #5A544A;
+  --cl-rule: #D6D0C4;
+  --cl-oxide: #A8431A;
+  --cl-on-oxide: #FFFFFF;
+  --cl-warning: #9B2226;
+  --cl-focus: #1C1A17;
+  --font-sans: Arial, Helvetica, "Liberation Sans", sans-serif;
+  --space-5: 5px;
+  --space-10: 10px;
+  --space-15: 15px;
+  --space-20: 20px;
+  --space-30: 30px;
+  --space-40: 40px;
+  --space-60: 60px;
+  --radius-0: 0;
+  --radius-frame: 3px;
+  --measure: 70ch;
+  --touch-min: 44px;
+  --figure-switch: 720px;
+  --lockup-min: 120px;
+  --symbol-min: 18px;
+  --stroke-structure: 1.6px;
+  --stroke-hair: 0.9px;
+}
+[data-theme="graphite"] {
+  --cl-paper: #1C1A17;
+  --cl-card: #1C1A17;
+  --cl-ink: #E8E3D8;
+  --cl-muted: #A79F93;
+  --cl-rule: #33302A;
+  --cl-oxide: #C4551F;
+  --cl-on-oxide: #1C1A17;
+  --cl-focus: #E8E3D8;
+}

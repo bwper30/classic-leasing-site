@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import CopyPage from '../components/CopyPage.astro';
+---
+<Base page="For employers" path="/for-employers/">
+  <CopyPage slug="for-employers" figures={[
+    { after: 'The deed is between three parties', n: 2 },
+    { after: 'Both amounts come from us', n: 9 },
+    { after: 'The novation ends.', n: 11 },
+    { after: "You aren't lending anything", n: 10 },
+  ]} />
+</Base>

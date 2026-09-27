@@ -1,0 +1,27 @@
+---
+import Figure from './Figure.astro';
+import { moneyFlow } from '../lib/figures';
+interface Props { items: { b: any; ctas?: any[]; figs: number[] }[] }
+const { items } = Astro.props;
+const mf = items.some(i => i.b.kind === 'diagram') ? moneyFlow() : '';
+---
+{items.map(({ b, ctas, figs }) => (
+  <Fragment>
+    {b.kind === 'h1' && <h1 set:html={b.html} />}
+    {b.kind === 'h2' && <h2 set:html={b.html} />}
+    {b.kind === 'h3' && <h3 set:html={b.html} />}
+    {b.kind === 'p' && <div class="prose"><p set:html={b.html} /></div>}
+    {b.kind === 'ul' && <div class="prose"><ul>{b.items.map((i: string) => <li set:html={i} />)}</ul></div>}
+    {b.kind === 'rule' && <hr class="section" />}
+    {b.kind === 'diagram' && <div class="mf-wrap" set:html={mf} />}
+    {b.kind === 'caption' && <p class="prose" style="color:var(--cl-muted);font-size:14px" set:html={b.html} />}
+    {ctas && (
+      <div class="cta-row">
+        {ctas.map((c: any, i: number) => (
+          <a class={c.primary || (i === 0 && ctas.length > 1) ? 'cl-btn cl-btn--primary' : 'cl-btn cl-btn--secondary'} href={c.href.endsWith('/') ? c.href : c.href + '/'}>{c.label}</a>
+        ))}
+      </div>
+    )}
+    {figs.map(n => <Figure n={n} />)}
+  </Fragment>
+))}

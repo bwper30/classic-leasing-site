@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-narrow" viewBox="0 0 360 446" width="360" height="446" role="img" aria-labelledby="clf02nt clf02nd"><title id="clf02nt">The three parties</title><desc id="clf02nd">Your employer sits above; the lease runs between you and Classic Leasing; a novation agreement binds all three.</desc><style>
+  .clf-narrow .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-narrow .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-narrow .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-narrow text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-narrow .clf-eb{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-ebo{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-lb{font-size:17px;font-weight:700}
+  .clf-narrow .clf-md{font-size:16px}
+  .clf-narrow .clf-sb{font-size:14.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-nt{font-size:15px}
+  .clf-narrow .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-ebo" x="16" y="24">NOVATION AGREEMENT — THE THREE OF US</text><rect class="clf-s" x="60" y="60" width="200" height="64"/><text class="clf-lb" x="160.0" y="90.0" text-anchor="middle">Your employer</text><text class="clf-sb" x="160.0" y="112.0" text-anchor="middle">deducts from your pay</text><path class="clf-s" d="M160 124 V238"/><text class="clf-sb" x="172" y="168">passes on the rental</text><rect class="clf-s" x="28" y="206" width="112" height="64"/><text class="clf-lb" x="84.0" y="236.0" text-anchor="middle">You</text><text class="clf-sb" x="84.0" y="258.0" text-anchor="middle">drive the car</text><rect class="clf-s" x="180" y="206" width="152" height="64"/><text class="clf-lb" x="256.0" y="236.0" text-anchor="middle">Classic Leasing</text><text class="clf-sb" x="256.0" y="258.0" text-anchor="middle">owns the car</text><path class="clf-s" d="M140 238 H180"/><text class="clf-eb" x="160" y="300" text-anchor="middle">THE LEASE</text><rect class="clf-oxs" x="16" y="36" width="328" height="284" rx="3"/><text class="clf-cp" x="344" y="356" text-anchor="end">FIG. 02</text><path class="clf-h" d="M16 364 H344"/><text class="clf-nt" x="16" y="388">The lease is between you and us. Your</text><text class="clf-nt" x="16" y="408">employer’s obligation ends when your</text><text class="clf-nt" x="16" y="428">employment does.</text></svg>

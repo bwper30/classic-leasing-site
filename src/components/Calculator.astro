@@ -1,0 +1,283 @@
+---
+/**
+ * The calculator. Labels come from the copy deck (calculator.md); every number from src/config;
+ * every result from src/lib/calculator/engine.ts, run in the browser. No network call except an
+ * anonymous funnel event (see functions/api/event.ts).
+ */
+import { raw, paras, fields, section, inline } from '../lib/copy';
+import { INPUTS, PAY_CYCLES, DEFAULT_PAY_CYCLE, SENSITIVITY } from '../config/calculator';
+import { INCOME_TAX_2026_27 } from '../config/tax-fy2027';
+
+const md = raw('calculator');
+const intro = paras(md, 'Intro');
+const f = fields(md, 'Input labels');
+const L = (label: string) => f.find(x => x.label.startsWith(label))!;
+const runIntro = paras(md, 'Running costs')[0];
+const runFields = fields(md, 'Running costs');
+const keepDesc = paras(md, 'Column 1 — Keep it as you are')[0];
+const pkgDesc = paras(md, 'Column 2 — Packaged with us')[0];
+const negTitle = section(md, 'When the result is negative').match(/\*\*H2:\*\*\s*(.+)/)![1];
+const negParas = section(md, 'When the result is negative').split(/\n\s*\n/).slice(1).map(p => p.replace(/\n/g, ' ').trim());
+const verified = new Date(INCOME_TAX_2026_27.verifiedOn + 'T00:00:00').toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+const assumptions = section(md, 'Assumptions panel').split(/\n(?=- )/).map(s => s.replace(/^- /, '').replace(/\n\s*/g, ' ').trim()).filter(Boolean)
+  .map(s => s.replace('{{TODO: financial year}}', '2026–27').replace('{{TODO: date}}', verified)).map(inline);
+const disclaimer = paras(md, 'Disclaimer');
+const RUN = [['fuel', 'Fuel'], ['insurance', 'Insurance'], ['registration', 'Registration'], ['servicing', 'Routine servicing'], ['tyres', 'Tyres'], ['maintenance', 'Maintenance and parts']] as const;
+const hint = (label: string) => runFields.find(x => x.label === label)?.hint;
+const money = (n: number) => '$' + n.toLocaleString('en-AU');
+---
+<section class="calc" data-calc>
+  {intro.map(p => <p class="lede" set:html={p} />)}
+
+  <div class="calc-grid">
+    <form class="calc-inputs no-print" autocomplete="off" onsubmit="return false">
+      <div class="cl-field">
+        <label for="salary">{L('Your salary before tax').label}</label>
+        <input class="cl-input" id="salary" name="salary" inputmode="numeric" value={money(INPUTS.salary.default)} data-num data-min={INPUTS.salary.min} data-max={INPUTS.salary.max} />
+        <span class="cl-hint">{L('Your salary before tax').hint}</span>
+      </div>
+      <div class="cl-field">
+        <label for="agreedValue">{L("What your car's worth").label.replace("'", '’')}</label>
+        <input class="cl-input" id="agreedValue" name="agreedValue" inputmode="numeric" value={money(INPUTS.agreedValue.default)} data-num data-min={INPUTS.agreedValue.min} data-max={INPUTS.agreedValue.max} />
+        <span class="cl-hint">{L("What your car's worth").hint.replace(/'/g, '’')}</span>
+      </div>
+      <div class="cl-field">
+        <label for="termYears">{L("How long you'd want the lease to run").label.replace("'", '’')}</label>
+        <select class="cl-input" id="termYears" name="termYears">
+          {[1, 2, 3, 4, 5].map(y => <option value={y} selected={y === INPUTS.termYears.default}>{y} year{y > 1 ? 's' : ''}</option>)}
+        </select>
+      </div>
+      <div class="cl-field">
+        <label for="kilometres">{L('Kilometres a year').label}</label>
+        <input class="cl-input" id="kilometres" name="kilometres" inputmode="numeric" value={INPUTS.kilometres.default.toLocaleString('en-AU')} data-num data-min={INPUTS.kilometres.min} data-max={INPUTS.kilometres.max} />
+        <span class="cl-hint">{L('Kilometres a year').hint}</span>
+      </div>
+      <div class="cl-field">
+        <label for="payCycle">Pay cycle</label>
+        <select class="cl-input" id="payCycle" name="payCycle">
+          {Object.keys(PAY_CYCLES).map(k => <option value={k} selected={k === DEFAULT_PAY_CYCLE.value}>{k[0].toUpperCase() + k.slice(1)}</option>)}
+        </select>
+      </div>
+
+      <h3>Running costs</h3>
+      <p class="cl-hint" set:html={runIntro} />
+      {RUN.map(([k, label]) => (
+        <div class="cl-field">
+          <label for={k}>{label}</label>
+          <input class="cl-input" id={k} name={k} inputmode="numeric" value={money(INPUTS[k].default)} data-num data-run data-min={INPUTS[k].min} data-max={INPUTS[k].max} />
+          {hint(label) && <span class="cl-hint">{hint(label)!.replace(/'/g, '’')}</span>}
+        </div>
+      ))}
+      <p class="run-total">Total a year <strong data-out="runTotal"></strong></p>
+    </form>
+
+    <div class="calc-result" aria-live="polite">
+      <p class="calc-refusal" data-out="refusal" hidden></p>
+      <div data-out="result">
+        <table class="cl-cost">
+          <caption class="cl-eyebrow" style="text-align:left;padding-bottom:10px">Each year of the lease</caption>
+          <thead>
+            <tr><th scope="col"></th><th scope="col" class="cl-keep">Keep it as you are</th><th scope="col" class="cl-with">Packaged with us</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Running costs</th><td class="cl-keep" data-out="keepRunning"></td><td class="cl-with" data-out="pkgRunning"></td></tr>
+            <tr><th scope="row">Lease rental</th><td class="cl-keep">—</td><td class="cl-with" data-out="rental"></td></tr>
+            <tr class="sub"><th scope="row">of which, lease charge on the agreed value</th><td class="cl-keep">—</td><td class="cl-with" data-out="leaseCharge"></td></tr>
+            <tr><th scope="row">Administration fee</th><td class="cl-keep">—</td><td class="cl-with" data-out="fee"></td></tr>
+            <tr><th scope="row">Income tax and Medicare levy</th><td class="cl-keep" data-out="keepTax"></td><td class="cl-with" data-out="pkgTax"></td></tr>
+            <tr><th scope="row">Employee contribution, after tax</th><td class="cl-keep">—</td><td class="cl-with" data-out="contribution"></td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Take-home pay after car costs</td><td class="cl-keep" data-out="keepTH"></td><td class="cl-with" data-out="pkgTH"></td></tr>
+          </tfoot>
+        </table>
+        <p class="col-notes"><span><strong>Keep it as you are.</strong> <Fragment set:html={keepDesc} /></span> <span><strong>Packaged with us.</strong> <Fragment set:html={pkgDesc} /></span></p>
+
+        <table class="cl-cost bottom">
+          <tbody>
+            <tr><th scope="row">Difference per pay cycle</th><td></td><td class="cl-with" data-out="perPay"></td></tr>
+            <tr><th scope="row">Difference in take-home over the term</th><td></td><td class="cl-with" data-out="cashTerm"></td></tr>
+            <tr><th scope="row">Agreed value paid to you at the start</th><td></td><td class="cl-with" data-out="valueIn"></td></tr>
+            <tr class="obligation"><th scope="row"><span class="cl-eyebrow warn">Obligation</span> Residual payable at the end of the term</th><td></td><td data-out="residual"></td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Difference over the term</td><td></td><td class="cl-with" data-out="overTerm"></td></tr>
+          </tfoot>
+        </table>
+
+        <div class="cl-notice negative" data-out="negative" hidden role="note">
+          <h2 set:html={inline(negTitle)} />
+          {negParas.map(p => <p set:html={inline(p).replace(/<mark class="cl-todo"[^>]*>[\s\S]*?<\/mark>/, '<strong data-out="whatWouldChange"></strong>')} />)}
+        </div>
+
+        <div class="shock no-print">
+          <h3>An unexpected bill</h3>
+          <div class="cl-field">
+            <label for="shock">A one-off bill in year <span data-out="shockYear"></span></label>
+            <input class="cl-input" id="shock" name="shock" inputmode="numeric" value={money(INPUTS.shock.default)} data-num data-min={INPUTS.shock.min} data-max={INPUTS.shock.max} />
+          </div>
+          <p data-out="shockText"></p>
+        </div>
+
+        <div class="sensitivity no-print">
+          <h3>If your running costs are different</h3>
+          <label for="sens">Running costs a year: <strong data-out="sensValue"></strong></label>
+          <input id="sens" type="range" min={SENSITIVITY.min} max={SENSITIVITY.max} step={SENSITIVITY.step} />
+          <p>Difference per year: <strong data-out="sensResult"></strong></p>
+          <div class="scroll"><table class="cl-cost sens-table">
+            <caption class="cl-eyebrow" style="text-align:left;padding-bottom:10px">Difference per year, by salary and running costs</caption>
+            <thead><tr><th scope="col">Running costs</th>{SENSITIVITY.tableSalaries.map(s => <th scope="col">{money(s)} salary</th>)}</tr></thead>
+            <tbody data-out="sensTable"></tbody>
+          </table></div>
+        </div>
+      </div>
+
+      <details class="assumptions" open>
+        <summary>Assumptions</summary>
+        <ul>{assumptions.map(a => <li set:html={a} />)}<li data-out="basisNote"></li></ul>
+      </details>
+      {disclaimer.map(p => <p class="disclaimer" set:html={p} />)}
+      <div class="cta-row no-print"><a class="cl-btn cl-btn--primary" href="/contact/">Get a quote on these numbers</a> <button class="cl-btn cl-btn--secondary" type="button" data-print>Print or save this result</button></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { calculate, netPerYearAt, breakEvenRunning, RUNNING_KEYS, type Inputs } from '../lib/calculator/engine';
+  import { PAY_CYCLES, SENSITIVITY, INPUTS } from '../config/calculator';
+  import { HEADLINE_BASIS } from '../config/calculator-basis';
+
+  const root = document.querySelector('[data-calc]') as HTMLElement;
+  const $ = (id: string) => root.querySelector(`[data-out="${id}"]`) as HTMLElement;
+  const fmt = (n: number, signed = false) => {
+    const s = '$' + Math.round(Math.abs(n)).toLocaleString('en-AU');
+    return signed ? (n < 0 ? '−' + s : '+' + s) : (n < 0 ? '−' + s : s);
+  };
+  const num = (el: HTMLInputElement) => {
+    const v = parseFloat(el.value.replace(/[^0-9.]/g, ''));
+    const min = +el.dataset.min!, max = +el.dataset.max!;
+    return isNaN(v) ? min : Math.min(max, Math.max(min, v));
+  };
+  const field = (id: string) => root.querySelector('#' + id) as HTMLInputElement;
+  const sens = field('sens') as HTMLInputElement;
+  let sensTouched = false, started = false, reported = '';
+
+  function event(name: string) {
+    try { navigator.sendBeacon?.('/api/event', JSON.stringify({ e: name })); } catch {}
+  }
+
+  function read(): Inputs & { payCycle: keyof typeof PAY_CYCLES } {
+    const running = Object.fromEntries(RUNNING_KEYS.map(k => [k, num(field(k))])) as Inputs['running'];
+    return {
+      salary: num(field('salary')), agreedValue: num(field('agreedValue')),
+      termYears: +(field('termYears') as any).value, running, shock: num(field('shock')),
+      payCycle: (field('payCycle') as any).value,
+    };
+  }
+
+  function render() {
+    const inp = read();
+    const total = RUNNING_KEYS.reduce((s, k) => s + inp.running[k], 0);
+    $('runTotal').textContent = fmt(total);
+    try { sessionStorage.setItem('cl-calc', JSON.stringify({ running: fmt(total) })); } catch {}
+    const r = calculate(inp);
+    if (!r.ok) { $('refusal').textContent = r.reason; $('refusal').hidden = false; $('result').hidden = true; return; }
+    $('refusal').hidden = true; $('result').hidden = false;
+    const y = calculate({ ...inp, shock: 0 }) as any;
+    const s = y.years[0];
+    const cycles = PAY_CYCLES[inp.payCycle];
+    const leaseChargeYear = r.leaseChargeTerm / r.years.length;
+    $('keepRunning').textContent = fmt(s.runningGross);
+    $('pkgRunning').textContent = fmt(s.runningGross - s.gstCreditsRunning);
+    $('rental').textContent = fmt(s.rentalExGst);
+    $('leaseCharge').textContent = fmt(leaseChargeYear);
+    $('fee').textContent = fmt(s.feeNet);
+    $('keepTax').textContent = fmt(s.keepTax);
+    $('pkgTax').textContent = fmt(s.packagedTax);
+    $('contribution').textContent = fmt(s.employeeContribution);
+    $('keepTH').textContent = fmt(s.keepTakeHome);
+    $('pkgTH').textContent = fmt(s.packagedTakeHome);
+    $('perPay').textContent = fmt(y.cashFlowPerYear / cycles, true) + ' ' + inp.payCycle;
+    $('cashTerm').textContent = fmt(r.cashFlowOverTerm, true);
+    $('valueIn').textContent = fmt(r.agreedValue, true);
+    $('residual').textContent = fmt(-r.residual, true);
+    $('overTerm').textContent = fmt(r.netOverTerm, true);
+
+    const headline = HEADLINE_BASIS.value === 'cashFlow' ? y.cashFlowPerYear : r.netOverTerm;
+    const neg = headline < 0;
+    $('negative').hidden = !neg;
+    if (neg) {
+      const be = breakEvenRunning({ ...inp, shock: 0 }, inp.salary, HEADLINE_BASIS.value);
+      let lo = 0, hi = inp.agreedValue;
+      for (let k = 0; k < 40; k++) { const m = (lo + hi) / 2; const v = netPerYearAt({ ...inp, agreedValue: m }, total, inp.salary, HEADLINE_BASIS.value)!; if (v > 0) lo = m; else hi = m; }
+      $('whatWouldChange').textContent =
+        `a lower agreed value (below about ${fmt(Math.floor(lo / 500) * 500)}), or higher running costs (above about ${fmt(Math.ceil((be ?? total) / 500) * 500)} a year)`;
+    }
+    const tag = neg ? 'calc_negative' : 'calc_positive';
+    if (started && reported !== tag) { event(tag); reported = tag; }
+
+    if (r.shockEffect) {
+      $('shockYear').textContent = String(r.shockYear);
+      $('shockText').textContent = `Kept as you are, a ${fmt(inp.shock!)} bill costs you ${fmt(r.shockEffect.keep)} from after-tax pay. Packaged, it costs you about ${fmt(r.shockEffect.packaged)} in take-home pay that year.`;
+    } else { $('shockYear').textContent = String(Math.ceil(inp.termYears / 2)); $('shockText').textContent = ''; }
+
+    if (!sensTouched) sens.value = String(Math.min(SENSITIVITY.max, Math.max(SENSITIVITY.min, total)));
+    const sv = +sens.value;
+    $('sensValue').textContent = fmt(sv);
+    $('sensResult').textContent = fmt(netPerYearAt(inp, sv, inp.salary, HEADLINE_BASIS.value)!, true);
+    $('sensTable').innerHTML = SENSITIVITY.tableRunningCosts.map(rc =>
+      `<tr><th scope="row">${fmt(rc)}</th>${SENSITIVITY.tableSalaries.map(sal => `<td>${fmt(netPerYearAt(inp, rc, sal, HEADLINE_BASIS.value)!, true)}</td>`).join('')}</tr>`).join('');
+    $('basisNote').textContent = HEADLINE_BASIS.value === 'cashFlow'
+      ? 'The difference per year compares take-home pay only. The agreed value we pay you at the start and the residual you pay at the end are shown separately.'
+      : 'The difference per year includes the agreed value we pay you at the start and the residual you pay at the end, spread over the term.';
+  }
+
+  root.addEventListener('input', e => {
+    const t = e.target as HTMLElement;
+    if (t === sens) sensTouched = true;
+    if (!started) { started = true; event('calc_start'); }
+    render();
+  });
+  root.addEventListener('change', e => {
+    const t = e.target as HTMLInputElement;
+    if (t.dataset.num !== undefined) { const v = num(t); t.value = t.id === 'kilometres' ? v.toLocaleString('en-AU') : fmt(v); render(); }
+  });
+  root.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+  render();
+</script>
+
+<style>
+  .calc-grid { display: grid; gap: var(--space-40); }
+  @media (min-width: 1000px) { .calc-grid { grid-template-columns: 340px 1fr; } }
+  .calc-inputs { display: grid; gap: var(--space-20); align-content: start; }
+  .calc-inputs .cl-field { max-width: none; }
+  .calc-inputs h3 { margin: var(--space-10) 0 0; }
+  .calc-inputs p { margin: 0; }
+  .run-total { margin: 0; border-top: 1.6px solid var(--cl-ink); padding-top: var(--space-10); display: flex; justify-content: space-between; }
+  .calc-result { min-width: 0; }
+  .calc-result .cl-cost { max-width: none; }
+  .scroll { overflow-x: auto; }
+  .calc-result th[scope="row"] { font-weight: 400; text-align: left; }
+  .cl-cost tr.sub th, .cl-cost tr.sub td { font-size: 14px; color: var(--cl-muted); padding-top: 0; }
+  .cl-cost.bottom { margin-top: var(--space-30); }
+  .cl-cost.bottom td:nth-child(2) { width: 0; padding: 0; }
+  .cl-cost .obligation td { color: var(--cl-warning); font-weight: 700; }
+  .cl-eyebrow.warn { color: var(--cl-warning); display: block; }
+  .col-notes { font-size: 14px; line-height: 20px; color: var(--cl-muted); display: grid; gap: var(--space-5); margin: var(--space-10) 0 0; }
+  .negative { margin-top: var(--space-30); }
+  .negative h2 { margin-top: var(--space-5); }
+  .shock, .sensitivity { margin-top: var(--space-40); }
+  .sensitivity input[type=range] { width: 100%; max-width: 560px; min-height: 44px; accent-color: var(--cl-ink); }
+  .sens-table { margin-top: var(--space-15); }
+  .assumptions { margin-top: var(--space-40); border-top: .9px solid var(--cl-rule); padding-top: var(--space-15); }
+  .assumptions summary { font-weight: 700; cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+  .assumptions ul { padding-left: 1.2em; margin: 0; font-size: 14px; line-height: 20px; }
+  .assumptions li { margin-bottom: var(--space-5); }
+  .disclaimer { font-size: 14px; line-height: 20px; color: var(--cl-muted); max-width: var(--measure); }
+  .calc-refusal { font-weight: 700; }
+  select.cl-input { appearance: auto; }
+  @media (max-width: 600px) {
+    .calc-result .cl-cost th, .calc-result .cl-cost td { padding: var(--space-10) 6px; font-size: 14px; }
+  }
+  @media print { .calc-grid { display: block; } }
+</style>

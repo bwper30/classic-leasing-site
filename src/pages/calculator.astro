@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import Calculator from '../components/Calculator.astro';
+import { raw, section, inline } from '../lib/copy';
+const h1 = section(raw('calculator'), 'H1');
+---
+<Base page="Calculator" path="/calculator/">
+  <h1 set:html={inline(h1)} />
+  <Calculator />
+</Base>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-wide" viewBox="0 0 900 330" width="900" height="330" role="img" aria-labelledby="clf09wt clf09wd"><title id="clf09wt">What payroll sets up</title><desc id="clf09wd">Two deduction lines: a pre-tax deduction, and a post-tax deduction where an employee contribution is used.</desc><style>
+  .clf-wide .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-wide .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-wide .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-wide .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-wide .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-wide .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-wide text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-wide .clf-eb{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-ebo{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-lb{font-size:17px;font-weight:700}
+  .clf-wide .clf-md{font-size:15px}
+  .clf-wide .clf-sb{font-size:13.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-nt{font-size:15px}
+  .clf-wide .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-eb" x="56" y="60">WHAT PAYROLL SETS UP</text><rect class="clf-s" x="56" y="80" width="528" height="152"/><path class="clf-h" d="M56 156 H584"/><text class="clf-lb" x="76" y="116">Pre-tax deduction</text><text class="clf-sb" x="76" y="138">the agreed portion of the rental and the running-cost budget</text><text class="clf-lb" x="76" y="192">Post-tax deduction</text><text class="clf-sb" x="76" y="214">if an employee contribution is used to reduce the taxable value to nil</text><path class="clf-oxs" d="M604 80 H616 V232 H604"/><text class="clf-md" x="636" y="142">Both amounts come from us</text><text class="clf-md" x="636" y="162">in writing.</text><text class="clf-sb" x="636" y="190">They change only if the employee asks,</text><text class="clf-sb" x="636" y="208">and we confirm the change in writing.</text><path class="clf-h" d="M56 292 H844"/><text class="clf-nt" x="56" y="316">Set up two deduction lines and leave them alone.</text><text class="clf-cp" x="844" y="316" text-anchor="end">FIG. 09</text></svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-narrow" viewBox="0 0 360 400" width="360" height="400" role="img" aria-labelledby="clf05nt clf05nd"><title id="clf05nt">The fund fills and empties</title><desc id="clf05nd">The balance builds with each pay cycle and falls when a bill is paid from it. What you can claim back is limited to what has accumulated.</desc><style>
+  .clf-narrow .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-narrow .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-narrow .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-narrow text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-narrow .clf-eb{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-ebo{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-lb{font-size:17px;font-weight:700}
+  .clf-narrow .clf-md{font-size:16px}
+  .clf-narrow .clf-sb{font-size:14.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-nt{font-size:15px}
+  .clf-narrow .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-sb" x="16" y="26">If you know a large bill is coming, you can build the</text><text class="clf-sb" x="16" y="44">balance ahead of it.</text><text class="clf-eb" x="16" y="72">BALANCE</text><path class="clf-h" d="M16 84 V254 H344"/><path class="clf-oxs" d="M 16.0 254.0 L 25.2 245.0 L 34.3 236.0 L 43.5 227.0 L 52.6 218.0 L 61.8 209.0 L 70.9 200.0 L 80.1 191.0 L 80.1 231.0 L 89.3 222.0 L 98.4 213.0 L 107.6 204.0 L 116.7 195.0 L 125.9 186.0 L 125.9 212.0 L 135.0 203.0 L 144.2 194.0 L 153.4 185.0 L 162.5 176.0 L 171.7 167.0 L 180.8 158.0 L 180.8 250.0 L 190.0 241.0 L 199.1 232.0 L 208.3 223.0 L 217.5 214.0 L 226.6 205.0 L 235.8 196.0 L 244.9 187.0 L 244.9 221.0 L 254.1 212.0 L 263.2 203.0 L 272.4 194.0 L 281.6 185.0 L 290.7 176.0 L 299.9 167.0 L 299.9 189.0 L 309.0 180.0 L 318.2 171.0 L 327.4 162.0 L 336.5 153.0"/><path class="clf-h" d="M180.8 124 V202"/><text class="clf-sb" x="172.8" y="136" text-anchor="end">a large bill</text><text class="clf-sb" x="16" y="278">Illustrative. Not a forecast.</text><text class="clf-eb" x="344" y="278" text-anchor="end">PAY CYCLES</text><text class="clf-cp" x="344" y="310" text-anchor="end">FIG. 05</text><path class="clf-h" d="M16 318 H344"/><text class="clf-nt" x="16" y="342">When you claim, we reimburse you from what</text><text class="clf-nt" x="16" y="362">has accumulated, so what you can claim back is</text><text class="clf-nt" x="16" y="382">limited to what is in there.</text></svg>

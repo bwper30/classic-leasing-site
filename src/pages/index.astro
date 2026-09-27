@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import CopyPage from '../components/CopyPage.astro';
+---
+<Base page="Home" path="/">
+  <CopyPage slug="home" figures={[
+    { after: 'Part of what', n: 4 },
+    { after: 'Depreciation on an older car', n: 8 },
+    { after: 'It pays the lease rental', n: 6 },
+  ]} band={{ at: 'Who this suits' }} />
+</Base>

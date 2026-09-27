@@ -1,0 +1,48 @@
+key,area,channel,verdict
+SAV-010,Savings,Website,Approved
+SAV-020,Savings,Website,Approved with qualifier
+SAV-030,Savings,Calculator and quote,Approved with qualifier
+SAV-040,Savings,Nowhere,Prohibited — legal
+SAV-050,Savings,Guide and FAQ,Conditional
+GST-010,GST,Nowhere,Prohibited — legal
+GST-020,GST,Internal only,Conditional
+OWN-010,Ownership,Website,Approved
+OWN-020,Ownership,Website,Approved
+OWN-030,Ownership,Nowhere,Conditional
+OWN-040,Ownership,Nowhere,Prohibited — legal
+PRI-010,Pricing,Nowhere,Prohibited — legal
+PRI-020,Pricing,Quote only,Approved with qualifier
+PRI-030,Pricing,Website,Approved
+PRI-040,Pricing,Website,Approved
+PRI-050,Pricing,Quote only,Approved
+PRI-060,Pricing,Website,Approved
+PRI-070,Pricing,Quote only,Approved
+PRI-080,Pricing,Internal only,Conditional
+TAX-010,Tax,Guide and FAQ,Approved with qualifier
+TAX-020,Tax,Calculator and quote,Conditional
+TAX-030,Tax,Guide and FAQ,Approved
+TAX-040,Tax,Nowhere,Prohibited — legal
+ELG-010,Eligibility,Website,Approved
+EMP-010,Employer,Website,Approved
+EMP-020,Employer,Nowhere,Prohibited — legal
+REG-010,Regulatory,Nowhere,Prohibited — legal
+REG-020,Regulatory,Nowhere,Prohibited — legal
+ENV-010,Environmental,Website,Approved
+ENV-020,Environmental,Website,Approved
+ENV-030,Environmental,Guide and FAQ,Approved with qualifier
+ENV-040,Environmental,Nowhere,Prohibited — legal
+ENV-050,Environmental,Nowhere,Conditional
+EOT-010,End of term,Website,Approved
+SVC-010,Service,Guide and FAQ,Approved
+SVC-020,Service,Guide and FAQ,Approved
+EOT-020,End of term,Guide and FAQ,Conditional
+POS-010,Positioning,Nowhere,Prohibited — positioning
+POS-020,Positioning,Nowhere,Prohibited — positioning
+POS-030,Positioning,Nowhere,Prohibited — legal
+POS-040,Positioning,Internal only,Conditional
+SAV-060,Savings,Nowhere,Prohibited — legal
+SAV-070,Savings,Website,Approved with qualifier
+SVC-030,Service,Guide and FAQ,Conditional
+SVC-040,Service,Website,Approved with qualifier
+PRI-090,Pricing,Internal only,Conditional
+SVC-050,Service,Website,Approved

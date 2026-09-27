@@ -1,0 +1,55 @@
+---
+/**
+ * Renders a copy-deck page. `figures` places CL-01f figures after the paragraph or heading whose
+ * text starts with the given string (CL-01f placement table). `stopAt` ends rendering at a
+ * heading; `startAt` begins after one. `band` puts the section from a heading up to the next
+ * rule on the graphite band, with an optional photograph (text-only until one is supplied).
+ */
+import Figure from './Figure.astro';
+import Blocks from './Blocks.astro';
+import { blocks, raw } from '../lib/copy';
+
+interface Props {
+  slug: string;
+  figures?: { after: string; n: number }[];
+  stopAt?: string;
+  startAt?: string;
+  band?: { at: string; photo?: { src: string; alt: string } };
+}
+const { slug, figures = [], stopAt, startAt, band } = Astro.props;
+let bs = blocks(raw(slug));
+if (startAt) { const i = bs.findIndex(b => b.text === startAt); if (i >= 0) bs = bs.slice(i + 1).filter(b => !(b.text || '').includes('{{TODO: eligibility criteria')); }
+if (stopAt) { const i = bs.findIndex(b => b.text === stopAt); if (i >= 0) bs = bs.slice(0, i); }
+// collapse consecutive CTAs into one row
+type Item = { b: any; ctas?: any[]; figs: number[] };
+const items: Item[] = [];
+for (const b of bs) {
+  if (b.kind === 'cta' && items.length && items[items.length - 1].ctas) { items[items.length - 1].ctas!.push(b); continue; }
+  items.push(b.kind === 'cta' ? { b, ctas: [b], figs: [] } : { b, figs: [] });
+}
+for (const f of figures) {
+  const it = items.find(i => i.b.text && i.b.text.startsWith(f.after));
+  if (!it) throw new Error(`${slug}: no block starting "${f.after}" for figure ${f.n}`);
+  it.figs.push(f.n);
+}
+let before = items, inBand: Item[] = [], after: Item[] = [];
+if (band) {
+  const s = items.findIndex(i => i.b.kind === 'h2' && i.b.text === band.at);
+  if (s < 0) throw new Error(`${slug}: no band heading "${band.at}"`);
+  let e = items.findIndex((i, k) => k > s && i.b.kind === 'rule');
+  if (e < 0) e = items.length;
+  before = items.slice(0, s); inBand = items.slice(s, e); after = items.slice(e + 1);
+}
+---
+<div class="prose-page">
+  <Blocks items={before} />
+  {inBand.length > 0 && (
+    <div class="band" data-theme="graphite">
+      <div class={`cl-band${band!.photo ? ' has-photo' : ''}`}>
+        <div><Blocks items={inBand} /></div>
+        {band!.photo && <img src={band!.photo.src} alt={band!.photo.alt} loading="lazy" />}
+      </div>
+    </div>
+  )}
+  <Blocks items={after} />
+</div>

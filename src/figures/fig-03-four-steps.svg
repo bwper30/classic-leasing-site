@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-wide" viewBox="0 0 900 340" width="900" height="340" role="img" aria-labelledby="clf03wt clf03wd"><title id="clf03wt">Four steps, and the car stays where it is</title><desc id="clf03wd">Four steps: we agree a value, we buy it, your employer novates the lease, you keep driving. Ownership changes at step two; the car does not move.</desc><style>
+  .clf-wide .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-wide .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-wide .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-wide .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-wide .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-wide .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-wide text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-wide .clf-eb{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-ebo{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-lb{font-size:17px;font-weight:700}
+  .clf-wide .clf-md{font-size:15px}
+  .clf-wide .clf-sb{font-size:13.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-nt{font-size:15px}
+  .clf-wide .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-eb" x="150" y="68" text-anchor="middle">STEP 1</text><text class="clf-lb" x="150" y="94" text-anchor="middle">We agree a value</text><text class="clf-sb" x="150" y="116" text-anchor="middle">what it’s worth, agreed with you</text><path class="clf-h" d="M150 132 V148"/><text class="clf-eb" x="348" y="68" text-anchor="middle">STEP 2</text><text class="clf-lb" x="348" y="94" text-anchor="middle">We buy it</text><text class="clf-sb" x="348" y="116" text-anchor="middle">we pay you that value</text><path class="clf-h" d="M348 132 V148"/><text class="clf-eb" x="546" y="68" text-anchor="middle">STEP 3</text><text class="clf-lb" x="546" y="94" text-anchor="middle">Your employer novates</text><text class="clf-sb" x="546" y="116" text-anchor="middle">a deduction each pay cycle</text><path class="clf-h" d="M546 132 V148"/><text class="clf-eb" x="744" y="68" text-anchor="middle">STEP 4</text><text class="clf-lb" x="744" y="94" text-anchor="middle">You keep driving</text><text class="clf-sb" x="744" y="116" text-anchor="middle">service it where you always have</text><path class="clf-h" d="M744 132 V148"/><path class="clf-h" d="M56 140 H844"/><path class="clf-s" d="M56 186 H844"/><path class="clf-oxs" d="M348 172 V200"/><text class="clf-eb" x="56" y="216">YOU OWN IT</text><text class="clf-ebo" x="360" y="216">WE OWN IT</text><rect class="clf-s" x="56" y="244" width="788" height="44"/><text class="clf-lb" x="450" y="271" text-anchor="middle">The car stays where it is</text><path class="clf-h" d="M56 302 H844"/><text class="clf-nt" x="56" y="326">Four steps, and the car stays where it is.</text><text class="clf-cp" x="844" y="326" text-anchor="end">FIG. 03</text></svg>

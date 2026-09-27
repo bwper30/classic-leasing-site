@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-narrow" viewBox="0 0 360 412" width="360" height="412" role="img" aria-labelledby="clf06nt clf06nd"><title id="clf06nt">What the fund can be spent on</title><desc id="clf06nd">The fund pays the lease rental and the car’s running costs. It cannot be spent on anything else.</desc><style>
+  .clf-narrow .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-narrow .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-narrow .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-narrow text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-narrow .clf-eb{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-ebo{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-lb{font-size:17px;font-weight:700}
+  .clf-narrow .clf-md{font-size:16px}
+  .clf-narrow .clf-sb{font-size:14.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-nt{font-size:15px}
+  .clf-narrow .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-eb" x="16" y="28">THE FUND PAYS FOR</text><text class="clf-md" x="16" y="60">Lease rental</text><text class="clf-md" x="16" y="88">Fuel</text><text class="clf-md" x="16" y="116">Servicing</text><text class="clf-md" x="180" y="60">Tyres</text><text class="clf-md" x="180" y="88">Registration</text><text class="clf-md" x="180" y="116">Insurance</text><path class="clf-oxs" d="M16 144 H344"/><text class="clf-eb" x="16" y="178">IT DOES NOT PAY FOR</text><text class="clf-md" x="16" y="210">An overseas holiday</text><text class="clf-md" x="16" y="238">A new kitchen</text><text class="clf-md" x="16" y="266">Anything that is not the car</text><text class="clf-cp" x="344" y="302" text-anchor="end">FIG. 06</text><path class="clf-h" d="M16 310 H344"/><text class="clf-nt" x="16" y="334">As many people put off maintenance until it</text><text class="clf-nt" x="16" y="354">becomes urgent and then have to pay using the</text><text class="clf-nt" x="16" y="374">credit card, that restriction can be extremely</text><text class="clf-nt" x="16" y="394">beneficial.</text></svg>

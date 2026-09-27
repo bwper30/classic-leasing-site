@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import { raw, section, paras, fields, inline } from '../lib/copy';
+import { SITE } from '../config/site';
+
+const md = raw('contact');
+const h1 = section(md, 'H1');
+const intro = paras(md, 'Intro');
+const F = fields(md, 'Form fields');
+const button = section(md, 'Button').replace(/\*\*/g, '').trim();
+const below = paras(md, 'Below the form').map(p =>
+  SITE.responseTime ? p.replace(/<mark class="cl-todo"[^>]*>TODO: response time commitment<\/mark>/, SITE.responseTime) : p)
+  .map(p => p.replace(/<mark class="cl-todo"[^>]*>TODO: link to privacy\s+policy<\/mark>/, '<a href="/privacy/">Privacy policy</a>'));
+const confirm = paras(md, 'Confirmation message');
+const errs = Object.fromEntries(section(md, 'Error messages').split('\n').filter(l => l.startsWith('- ')).map(l => {
+  const m = l.match(/^- \*\*(.+?):\*\*\s*(.+)$/)!; return [m[1], inline(m[2])];
+}));
+const names = ['name', 'email', 'phone', 'car', 'odometer', 'running', 'employer', 'notes'];
+const types = ['text', 'email', 'tel', 'textarea', 'text', 'text', 'text', 'textarea'];
+const PREVIEW = !!process.env.PREVIEW;
+---
+<Base page="Contact" path="/contact/">
+  <h1 set:html={inline(h1)} />
+  {intro.map(p => <p class="lede" set:html={p} />)}
+  <form class="enquiry" data-enquiry novalidate>
+    {F.map((f, i) => {
+      const optional = f.label.includes('(optional)');
+      const id = names[i];
+      return (
+        <div class="cl-field">
+          <label for={id}>{f.label.replace(' (optional)', '').replace(/'/g, '’')}{optional && <span class="opt"> (optional)</span>}</label>
+          {types[i] === 'textarea'
+            ? <textarea class="cl-input" id={id} name={id} rows="3" required={!optional} />
+            : <input class="cl-input" id={id} name={id} type={types[i]} required={!optional} autocomplete={id === 'name' ? 'name' : id === 'email' ? 'email' : id === 'phone' ? 'tel' : 'off'} inputmode={id === 'odometer' || id === 'running' ? 'numeric' : undefined} />}
+          {f.hint && <span class="cl-hint">{f.hint.replace(/'/g, '’')}</span>}
+          <span class="err" hidden></span>
+        </div>
+      );
+    })}
+    <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+    <div class="cta-row"><button class="cl-btn cl-btn--primary" type="submit">{button}</button></div>
+    <p class="send-error" role="alert" hidden set:html={errs['Send failure']} />
+    {PREVIEW && <p class="cl-hint"><mark class="cl-todo">TODO: the form posts to /api/enquiry, which runs only once the site is on Cloudflare — in this preview it will show the send-failure message</mark></p>}
+  </form>
+  <div class="confirm" role="status" hidden>{confirm.map(p => <p set:html={p} />)}</div>
+  <div class="below">{below.map(p => <p set:html={p} />)}</div>
+  <script type="application/json" id="enquiry-errors" set:html={JSON.stringify(errs)} />
+</Base>
+
+<script>
+  const form = document.querySelector('[data-enquiry]') as HTMLFormElement;
+  const E = JSON.parse(document.getElementById('enquiry-errors')!.textContent!);
+  try {
+    const pre = JSON.parse(sessionStorage.getItem('cl-calc') || 'null');
+    if (pre) { (form.elements.namedItem('running') as HTMLInputElement).value = pre.running ?? ''; }
+  } catch {}
+  function show(el: HTMLInputElement, html: string | null) {
+    const e = el.parentElement!.querySelector('.err') as HTMLElement;
+    e.hidden = !html; e.innerHTML = html ?? '';
+    el.setAttribute('aria-invalid', html ? 'true' : 'false');
+  }
+  form.addEventListener('submit', async ev => {
+    ev.preventDefault();
+    let first: HTMLInputElement | null = null;
+    for (const el of Array.from(form.querySelectorAll<HTMLInputElement>('.cl-input'))) {
+      let msg: string | null = null;
+      if (el.required && !el.value.trim()) msg = E['Required field'];
+      else if (el.type === 'email' && el.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)) msg = E['Email'];
+      show(el, msg);
+      if (msg && !first) first = el;
+    }
+    if (first) { first.focus(); return; }
+    const data = Object.fromEntries(new FormData(form).entries());
+    const errEl = form.querySelector('.send-error') as HTMLElement;
+    try {
+      const r = await fetch('/api/enquiry', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
+      if (!r.ok) throw new Error(String(r.status));
+      form.hidden = true;
+      (document.querySelector('.confirm') as HTMLElement).hidden = false;
+    } catch { errEl.hidden = false; }
+  });
+</script>
+
+<style>
+  .enquiry { display: grid; gap: var(--space-20); max-width: 560px; margin-top: var(--space-20); }
+  .enquiry .cl-field { max-width: none; }
+  textarea.cl-input { height: auto; padding: var(--space-10); resize: vertical; }
+  .opt { font-weight: 400; color: var(--cl-muted); }
+  .err { color: var(--cl-ink); font-size: 14px; font-weight: 700; }
+  .err::before { content: 'Check this: '; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
+  .below, .confirm { max-width: var(--measure); margin-top: var(--space-30); }
+  .below p { color: var(--cl-muted); font-size: 14px; line-height: 20px; }
+  .send-error { font-weight: 700; }
+</style>

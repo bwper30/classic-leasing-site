@@ -1,0 +1,102 @@
+---
+import { raw, section, paras, inline } from '../lib/copy';
+import { BODY_OPTIONS, CONDITION_OPTIONS, RULES } from '../config/eligibility';
+
+const md = raw('eligibility');
+const intro = paras(md, 'Intro');
+const q = (n: number) => {
+  const all = section(md, 'Questions');
+  const m = all.match(new RegExp(`\\*\\*${n}\\. (.+?)\\*\\*(?:\\n([^*\\-][\\s\\S]*?))?(?=\\n\\n|\\n- |$)`));
+  return { label: m ? m[1].replace(/'/g, '’') : '', hint: m && m[2] ? m[2].replace(/\n/g, ' ').trim() : '' };
+};
+const state = (n: number, name: string) => {
+  const s = section(md, `State ${n} — ${name}`);
+  const h2 = s.match(/\*\*H2:\*\*\s*(.+)/)![1];
+  const body = s.split(/\n\s*\n/).slice(1).map(p => p.replace(/\n/g, ' ').trim()).filter(p => !/→/.test(p));
+  const cta = s.match(/\*\*(.+?)\*\*\s*→\s*(\S+)/)!;
+  return { h2: inline(h2), body: body.map(p => inline(p).replace(/<mark class="cl-todo"[^>]*>[\s\S]*?<\/mark>/, '<span data-reasons></span>')), cta: cta[1], href: cta[2] + '/' };
+};
+const S = [state(1, 'Looks eligible'), state(2, 'Needs a conversation'), state(3, 'Outside our criteria')];
+const q5 = q(5);
+const provisional = Object.values(RULES).some(r => r.provisional);
+const thisYear = new Date().getFullYear();
+---
+<section class="checker" data-checker>
+  {intro.map(p => <p class="lede" set:html={p} />)}
+  <form class="check-form" autocomplete="off">
+    <fieldset>
+      <legend>1. {q(1).label}</legend>
+      <p class="cl-hint">{q(1).hint.replace(/'/g, '’')}</p>
+      <div class="row">
+        <div class="cl-field"><label for="make">Make and model</label><input class="cl-input" id="make" name="make" /></div>
+        <div class="cl-field"><label for="year">Year</label><input class="cl-input" id="year" name="year" inputmode="numeric" required placeholder={`e.g. ${thisYear - 12}`} /></div>
+        <div class="cl-field"><label for="body">Type</label>
+          <select class="cl-input" id="body" name="body">{BODY_OPTIONS.map(b => <option value={b.id}>{b.label}</option>)}</select></div>
+      </div>
+    </fieldset>
+    <div class="cl-field"><label for="odometer">2. {q(2).label}</label><input class="cl-input" id="odometer" name="odometer" inputmode="numeric" required /><span class="cl-hint">{q(2).hint}</span></div>
+    <div class="cl-field"><label for="value">3. {q(3).label}</label><input class="cl-input" id="value" name="value" inputmode="numeric" required /><span class="cl-hint">{q(3).hint.replace(/'/g, '’')}</span></div>
+    <div class="cl-field"><label for="running">4. {q(4).label}</label><input class="cl-input" id="running" name="running" inputmode="numeric" required /><span class="cl-hint">{q(4).hint}</span></div>
+    <div class="cl-field"><label for="term">5. {q5.label}</label>
+      <select class="cl-input" id="term" name="term">{[1, 2, 3, 4, 5].map(y => <option value={y} selected={y === 3}>{y} year{y > 1 ? 's' : ''}</option>)}</select>
+    </div>
+    <fieldset>
+      <legend>6. {q(6).label}</legend>
+      {CONDITION_OPTIONS.map((c, i) => <label class="radio"><input type="radio" name="condition" value={c.id} checked={i === 0} /> {c.label}</label>)}
+    </fieldset>
+    <div class="cta-row"><button class="cl-btn cl-btn--primary" type="submit">Check your car</button></div>
+    {provisional && <p class="cl-hint"><mark class="cl-todo">TODO: the rules behind this checker are proposals awaiting approval</mark></p>}
+  </form>
+
+  <div class="results" aria-live="polite">
+    {S.map((s, i) => (
+      <div class="result" data-state={['eligible', 'conversation', 'outside'][i]} hidden>
+        <h2 set:html={s.h2} />
+        {s.body.map(p => <p set:html={p} />)}
+        <div class="cta-row"><a class={i === 0 ? 'cl-btn cl-btn--primary' : 'cl-btn cl-btn--secondary'} href={s.href}>{s.cta}</a></div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { check } from '../lib/eligibility';
+  const root = document.querySelector('[data-checker]') as HTMLElement;
+  const form = root.querySelector('form') as HTMLFormElement;
+  const n = (name: string) => parseFloat(((form.elements.namedItem(name) as HTMLInputElement).value || '').replace(/[^0-9.]/g, ''));
+  let started = false;
+  form.addEventListener('input', () => { if (!started) { started = true; try { navigator.sendBeacon?.('/api/event', JSON.stringify({ e: 'check_start' })); } catch {} } });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const r = check({
+      body: (form.elements.namedItem('body') as HTMLSelectElement).value,
+      year: n('year'), odometer: n('odometer'), value: n('value'), runningCost: n('running'),
+      termYears: n('term'), condition: (form.querySelector('input[name=condition]:checked') as HTMLInputElement).value,
+    });
+    root.querySelectorAll<HTMLElement>('.result').forEach(el => {
+      el.hidden = el.dataset.state !== r.outcome;
+      const slot = el.querySelector('[data-reasons]');
+      if (slot) slot.textContent = r.reasons.join(' ');
+    });
+    const shown = root.querySelector<HTMLElement>(`.result[data-state="${r.outcome}"]`)!;
+    shown.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    try { navigator.sendBeacon?.('/api/event', JSON.stringify({ e: 'check_' + r.outcome })); } catch {}
+  });
+</script>
+
+<style>
+  .check-form { display: grid; gap: var(--space-20); max-width: 640px; }
+  .check-form fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--space-10); }
+  .check-form legend { font-weight: 700; padding: 0; margin-bottom: var(--space-5); }
+  .check-form .cl-field { max-width: none; }
+  .check-form .row { display: grid; gap: var(--space-15); }
+  @media (min-width: 640px) { .check-form .row { grid-template-columns: 2fr 1fr 2fr; } }
+  .check-form p { margin: 0; }
+  .radio { display: flex; align-items: center; gap: var(--space-10); min-height: 44px; }
+  .radio input { width: 20px; height: 20px; accent-color: var(--cl-ink); }
+  .results { max-width: 640px; }
+  .result { border-top: 1.6px solid var(--cl-ink); margin-top: var(--space-40); padding-top: var(--space-10); }
+  .result h2 { margin-top: var(--space-10); }
+  select.cl-input { appearance: auto; }
+</style>

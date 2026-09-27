@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-narrow" viewBox="0 0 360 423" width="360" height="423" role="img" aria-labelledby="clf12nt clf12nd"><title id="clf12nt">What the administration fee is built from</title><desc id="clf12nd">A base amount that is the same for everyone, plus a component that varies with how much is claimed through the year.</desc><style>
+  .clf-narrow .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-narrow .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-narrow .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-narrow text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-narrow .clf-eb{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-ebo{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-lb{font-size:17px;font-weight:700}
+  .clf-narrow .clf-md{font-size:16px}
+  .clf-narrow .clf-sb{font-size:14.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-nt{font-size:15px}
+  .clf-narrow .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-sb" x="344" y="24" text-anchor="end">Illustrative. Not to scale.</text><text class="clf-eb" x="16" y="56">A CAR THAT MOSTLY NEEDS FUEL</text><text class="clf-eb" x="16" y="72">AND A SERVICE</text><rect class="clf-s" x="16" y="84" width="158.8" height="36"/><rect class="clf-oxf" x="174.8" y="84" width="52.1" height="36"/><text class="clf-eb" x="16" y="156">A CAR WITH HEAVY MAINTENANCE</text><rect class="clf-s" x="16" y="168" width="158.8" height="36"/><rect class="clf-oxf" x="174.8" y="168" width="169.2" height="36"/><rect class="clf-s" x="16" y="232" width="20" height="20"/><text class="clf-sb" x="46" y="247">base amount, the same for everyone</text><rect class="clf-oxf" x="16" y="264" width="20" height="20"/><text class="clf-sb" x="46" y="279">varies with how much you claim through the</text><text class="clf-sb" x="46" y="297">year</text><text class="clf-cp" x="344" y="333" text-anchor="end">FIG. 12</text><path class="clf-h" d="M16 341 H344"/><text class="clf-nt" x="16" y="365">Publishing a single figure would mean either</text><text class="clf-nt" x="16" y="385">overcharging the first person or underquoting the</text><text class="clf-nt" x="16" y="405">second.</text></svg>

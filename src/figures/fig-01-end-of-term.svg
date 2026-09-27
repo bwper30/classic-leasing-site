@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-wide" viewBox="0 0 900 340" width="900" height="340" role="img" aria-labelledby="clf01wt clf01wd"><title id="clf01wt">At the end of the term</title><desc id="clf01wd">A timeline of the lease term ending at a residual amount agreed at the start, followed by three choices: pay the residual, re-lease it, or hand it back.</desc><style>
+  .clf-wide .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-wide .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-wide .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-wide .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-wide .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-wide .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-wide text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-wide .clf-eb{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-ebo{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-lb{font-size:17px;font-weight:700}
+  .clf-wide .clf-md{font-size:15px}
+  .clf-wide .clf-sb{font-size:13.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-nt{font-size:15px}
+  .clf-wide .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><path class="clf-s" d="M56 150 H420"/><path class="clf-h" d="M108 144 V156 M160 144 V156 M212 144 V156 M264 144 V156 M316 144 V156 M368 144 V156"/><path class="clf-s" d="M56 132 V168"/><path class="clf-s" d="M420 124 V176"/><text class="clf-eb" x="56" y="116">START</text><text class="clf-sb" x="56" y="190">we agree a value</text><text class="clf-sb" x="196" y="190">rental paid each pay cycle</text><text class="clf-eb" x="420" y="112" text-anchor="end">END OF TERM</text><rect class="clf-ox" x="415" y="137" width="10" height="26"/><path class="clf-oxs" d="M420 176 V222"/><text class="clf-lb" x="420" y="244" text-anchor="end">Residual</text><text class="clf-sb" x="420" y="264" text-anchor="end">agreed at the start, in writing</text><path class="clf-s" d="M420 150 H452"/><path class="clf-s" d="M452 150 V86 H496"/><path class="clf-s" d="M452 150 H496"/><path class="clf-s" d="M452 150 V214 H496"/><path class="clf-h" d="M496 78 V94 M496 142 V158 M496 206 V222"/><text class="clf-lb" x="512" y="82">Pay the residual</text><text class="clf-sb" x="512" y="102">You own the car outright.</text><text class="clf-lb" x="512" y="146">Re-lease it</text><text class="clf-sb" x="512" y="166">A new agreed value and a new term.</text><text class="clf-lb" x="512" y="210">Hand it back</text><text class="clf-sb" x="512" y="230">The lease ends and the car goes back.</text><path class="clf-h" d="M56 302 H844"/><text class="clf-nt" x="56" y="326">We’ll set out what each one costs before you sign anything.</text><text class="clf-cp" x="844" y="326" text-anchor="end">FIG. 01</text></svg>

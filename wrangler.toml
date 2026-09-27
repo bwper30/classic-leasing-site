@@ -1,0 +1,9 @@
+# Cloudflare Pages project. Created once in the dashboard; see README "Deploying".
+name = "classic-leasing"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "classic-leasing"
+database_id = "TODO-set-after-creating-the-database"

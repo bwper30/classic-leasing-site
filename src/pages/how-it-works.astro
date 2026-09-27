@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import CopyPage from '../components/CopyPage.astro';
+---
+<Base page="How it works" path="/how-it-works/">
+  <CopyPage slug="how-it-works" figures={[
+    { after: 'Four steps', n: 3 },
+    { after: 'When you claim', n: 5 },
+    { after: "There's a residual", n: 1 },
+  ]} />
+</Base>

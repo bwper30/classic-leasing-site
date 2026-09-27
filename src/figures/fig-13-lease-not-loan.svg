@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-wide" viewBox="0 0 900 360" width="900" height="360" role="img" aria-labelledby="clf13wt clf13wd"><title id="clf13wt">A lease is not a loan</title><desc id="clf13wd">Compared across four rows: who owns the car, what you pay, what happens at the end, and whether you are borrowing.</desc><style>
+  .clf-wide .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-wide .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-wide .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-wide .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-wide .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-wide .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-wide text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-wide .clf-eb{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-ebo{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-lb{font-size:17px;font-weight:700}
+  .clf-wide .clf-md{font-size:15px}
+  .clf-wide .clf-sb{font-size:13.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-nt{font-size:15px}
+  .clf-wide .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-eb" x="400" y="76">IF YOU BORROWED</text><text class="clf-ebo" x="660" y="76">WITH US</text><path class="clf-h" d="M400 88 H620"/><path class="clf-oxs" d="M660 88 H844"/><text class="clf-sb" x="56" y="124">Who owns the car</text><text class="clf-md" x="400" y="124">You do</text><text class="clf-md" x="660" y="124">We do</text><path class="clf-r" d="M56 140 H844"/><text class="clf-sb" x="56" y="170">What you pay</text><text class="clf-md" x="400" y="170">Repayments with interest</text><text class="clf-md" x="660" y="170">A lease rental</text><path class="clf-r" d="M56 186 H844"/><text class="clf-sb" x="56" y="216">At the end</text><text class="clf-md" x="400" y="216">You own it outright</text><text class="clf-md" x="660" y="216">There’s a residual to settle</text><path class="clf-r" d="M56 232 H844"/><text class="clf-sb" x="56" y="262">Are you borrowing</text><text class="clf-md" x="400" y="262">Yes</text><text class="clf-md" x="660" y="262">No</text><path class="clf-h" d="M56 322 H844"/><text class="clf-nt" x="56" y="346">It isn’t interest and you aren’t borrowing. We own the car and we’re leasing it to you.</text><text class="clf-cp" x="844" y="346" text-anchor="end">FIG. 13</text></svg>

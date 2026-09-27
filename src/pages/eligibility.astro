@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Checker from '../components/Checker.astro';
+import CopyPage from '../components/CopyPage.astro';
+import Figure from '../components/Figure.astro';
+import { raw, section, inline } from '../lib/copy';
+import { RULES } from '../config/eligibility';
+const h1 = section(raw('eligibility'), 'H1');
+const money = (n: number) => '$' + n.toLocaleString('en-AU');
+const criteria = [
+  `A car for fringe benefits tax purposes: a load under one tonne and fewer than nine passengers`,
+  `No more than ${RULES.maxAgeAtLeaseEnd.value} years old at the end of the lease`,
+  `Under ${RULES.maxOdometer.value.toLocaleString('en-AU')} km`,
+  `An agreed value between ${money(RULES.minAgreedValue.value)} and ${money(RULES.maxAgreedValue.value)}`,
+];
+const provisional = Object.values(RULES).some(r => r.provisional);
+---
+<Base page="Is my car eligible?" path="/eligibility/">
+  <h1 set:html={inline(h1)} />
+  <Checker />
+  <Figure n={14} />
+  <h2>Our criteria</h2>
+  {provisional && <p><mark class="cl-todo">TODO: proposed criteria, not yet approved — the copy file shows "criteria coming soon" until they are</mark></p>}
+  <div class="prose"><ul>{criteria.map(c => <li>{c}</li>)}</ul></div>
+  <CopyPage slug="eligibility" startAt="Our criteria" />
+</Base>

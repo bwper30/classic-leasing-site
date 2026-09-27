@@ -1,0 +1,9 @@
+---
+import { figure } from '../lib/figures';
+interface Props { n: number }
+const f = figure(Astro.props.n);
+---
+<figure class="cl-figure">
+  <Fragment set:html={f.narrow} />
+  <Fragment set:html={f.wide} />
+</figure>

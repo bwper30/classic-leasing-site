@@ -1,0 +1,82 @@
+---
+import '../styles/tokens.css';
+import '../styles/components.css';
+import '../styles/site.css';
+import { raw, clean, inline, meta } from '../lib/copy';
+import { SITE } from '../config/site';
+
+interface Props { page: string; path: string; fallbackTitle?: string }
+const { page, path, fallbackTitle } = Astro.props;
+const m = meta(page, fallbackTitle);
+const PREVIEW = !!import.meta.env.PREVIEW || !!process.env.PREVIEW;
+
+const NAV = [
+  ['How it works', '/how-it-works/'], ['Is my car eligible?', '/eligibility/'], ['Calculator', '/calculator/'],
+  ['What it costs', '/what-it-costs/'], ['For employers', '/for-employers/'], ['FAQ', '/faq/'], ['About', '/about/'],
+];
+const FOOT = [
+  [['How it works', '/how-it-works/'], ['Is my car eligible?', '/eligibility/'], ['Calculator', '/calculator/'], ['What it costs', '/what-it-costs/']],
+  [['For employers', '/for-employers/'], ['FAQ', '/faq/'], ['About', '/about/'], ['Contact', '/contact/']],
+  [['Privacy', '/privacy/'], ['Terms', '/terms/'], ['Complaints', '/complaints/']],
+];
+
+// Footer copy from the global file.
+const g = clean(raw('global'));
+const foot = g.slice(g.indexOf('## Footer'), g.indexOf('## Page titles'));
+const about = foot.match(/\n\nWe buy older cars[\s\S]*?\n\n/)![0].replace(/\s+/g, ' ').trim();
+const disclaimer = foot.match(/This is general information only[\s\S]*?you decide\./)![0].replace(/\s+/g, ' ');
+const q34 = foot.match(/Whether we can do this[\s\S]*?payroll deduction\./)![0].replace(/\s+/g, ' ');
+const entity = [SITE.tradingEntity, SITE.abn ? `ABN ${SITE.abn}` : null].filter(Boolean).join(' · ');
+---
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{m.title}</title>
+  <meta name="description" content={m.description} />
+  {PREVIEW && <meta name="robots" content="noindex, nofollow" />}
+  <link rel="icon" href="/brand/cl-symbol-hex-oxide.svg" type="image/svg+xml" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  {PREVIEW && (
+    <div class="preview-bar" role="note"><strong>Preview.</strong> Not public. Highlighted items are not settled yet; a launch build refuses to run while any remain.</div>
+  )}
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/" aria-label="Classic Leasing, home"><img src="/brand/cl-lockup-primary-paper.svg" alt="Classic Leasing" width="126" height="36" /></a>
+      <button class="nav-toggle no-print" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          {NAV.map(([label, href]) => <li><a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a></li>)}
+          <li><a class="cl-btn cl-btn--primary" href="/contact/">Get a quote</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="cl">
+    <slot />
+  </main>
+  <footer class="site-footer">
+    <div class="inner">
+      <p class="who"><strong>Classic Leasing</strong> {entity ? entity : <Fragment set:html={inline('{{TODO: trading entity, ABN}}')} />}</p>
+      <p set:html={inline(about)} />
+      <nav class="cols" aria-label="Footer">
+        {FOOT.map(col => <ul>{col.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul>)}
+      </nav>
+      {SITE.licensingBlock && <p>{SITE.licensingBlock}</p>}
+      <p set:html={inline(disclaimer)} />
+      <p set:html={inline(q34)} />
+    </div>
+  </footer>
+  <script>
+    const t = document.querySelector('.nav-toggle');
+    const n = document.getElementById('site-nav');
+    t?.addEventListener('click', () => {
+      const open = n!.classList.toggle('open');
+      t.setAttribute('aria-expanded', String(open));
+    });
+  </script>
+</body>
+</html>

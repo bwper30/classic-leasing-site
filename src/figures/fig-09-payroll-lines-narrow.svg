@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-narrow" viewBox="0 0 360 408" width="360" height="408" role="img" aria-labelledby="clf09nt clf09nd"><title id="clf09nt">What payroll sets up</title><desc id="clf09nd">Two deduction lines: a pre-tax deduction, and a post-tax deduction where an employee contribution is used.</desc><style>
+  .clf-narrow .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-narrow .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-narrow .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-narrow .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-narrow text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-narrow .clf-eb{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-ebo{font-size:11.5px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-narrow .clf-lb{font-size:17px;font-weight:700}
+  .clf-narrow .clf-md{font-size:16px}
+  .clf-narrow .clf-sb{font-size:14.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-narrow .clf-nt{font-size:15px}
+  .clf-narrow .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><text class="clf-eb" x="16" y="28">WHAT PAYROLL SETS UP</text><text class="clf-lb" x="32" y="76">Pre-tax deduction</text><text class="clf-sb" x="32" y="98">the agreed portion of the rental and the</text><text class="clf-sb" x="32" y="116">running-cost budget</text><text class="clf-lb" x="32" y="168">Post-tax deduction</text><text class="clf-sb" x="32" y="190">if an employee contribution is used to reduce</text><text class="clf-sb" x="32" y="208">the taxable value to nil</text><rect class="clf-s" x="16" y="44" width="328" height="184"/><path class="clf-h" d="M16 136 H344"/><path class="clf-oxs" d="M16 240 V252 H344 V240"/><text class="clf-md" x="16" y="280">Both amounts come from us in writing.</text><text class="clf-sb" x="16" y="304">They change only if the employee asks, and we</text><text class="clf-sb" x="16" y="322">confirm the change in writing.</text><text class="clf-cp" x="344" y="358" text-anchor="end">FIG. 09</text><path class="clf-h" d="M16 366 H344"/><text class="clf-nt" x="16" y="390">Set up two deduction lines and leave them alone.</text></svg>

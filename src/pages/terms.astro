@@ -1,0 +1,8 @@
+---
+import Base from '../layouts/Base.astro';
+import { inline } from '../lib/copy';
+---
+<Base page="Terms" path="/terms/" fallbackTitle="Website terms">
+  <h1>Website terms</h1>
+  <p set:html={inline('{{TODO: website terms of use — a lawyer deliverable (see legal-brief.md, section 2)}}')} />
+</Base>

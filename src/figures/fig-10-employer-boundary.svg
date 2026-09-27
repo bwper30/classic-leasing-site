@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="clf clf-wide" viewBox="0 0 900 310" width="900" height="310" role="img" aria-labelledby="clf10wt clf10wd"><title id="clf10wt">What you take on, and what you don’t</title><desc id="clf10wd">The employer operates a deduction and carries the FBT liability; they do not take on the vehicle, residual risk, a fee, or any obligation after the employment ends.</desc><style>
+  .clf-wide .clf-s{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:1.6;stroke-linecap:square}
+  .clf-wide .clf-h{stroke:var(--cl-ink,#1C1A17);fill:none;stroke-width:0.9}
+  .clf-wide .clf-r{stroke:var(--cl-rule,#D6D0C4);fill:none;stroke-width:0.9}
+  .clf-wide .clf-ox{fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-oxs{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:1.6}
+  .clf-wide .clf-oxh{stroke:var(--cl-oxide,#A8431A);fill:none;stroke-width:0.9}
+  .clf-wide .clf-oxf{fill:var(--cl-oxide,#A8431A);stroke:var(--cl-oxide,#A8431A);stroke-width:1.6}
+  .clf-wide text{font-family:Arial,Helvetica,'Liberation Sans',sans-serif;fill:var(--cl-ink,#1C1A17);font-variant-numeric:tabular-nums}
+  .clf-wide .clf-eb{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-ebo{font-size:11px;font-weight:700;letter-spacing:0.14em;fill:var(--cl-oxide,#A8431A)}
+  .clf-wide .clf-lb{font-size:17px;font-weight:700}
+  .clf-wide .clf-md{font-size:15px}
+  .clf-wide .clf-sb{font-size:13.5px;fill:var(--cl-muted,#5A544A)}
+  .clf-wide .clf-nt{font-size:15px}
+  .clf-wide .clf-cp{font-size:11px;letter-spacing:0.14em;fill:var(--cl-muted,#5A544A)}
+</style><path class="clf-oxs" d="M450 56 V212"/><text class="clf-eb" x="56" y="52">YOU TAKE ON</text><text class="clf-md" x="56" y="88">A payroll deduction each cycle</text><text class="clf-md" x="56" y="118">Remitting it to us</text><text class="clf-md" x="56" y="148">The FBT liability, as with any novated lease</text><text class="clf-eb" x="474" y="52">YOU DON’T TAKE ON</text><text class="clf-md" x="474" y="88">The vehicle</text><text class="clf-md" x="474" y="118">Residual risk</text><text class="clf-md" x="474" y="148">Any fee — there is none to you</text><text class="clf-md" x="474" y="178">Any obligation once the employment ends</text><path class="clf-h" d="M56 272 H844"/><text class="clf-nt" x="56" y="296">You aren’t lending anything, guaranteeing anything, or taking on an asset.</text><text class="clf-cp" x="844" y="296" text-anchor="end">FIG. 10</text></svg>

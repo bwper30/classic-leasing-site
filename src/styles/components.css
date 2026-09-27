@@ -1,0 +1,49 @@
+/* Classic Leasing — component styles. Every value is a token from tokens.css. */
+.cl, .cl * { box-sizing: border-box; }
+.cl { font-family: var(--font-sans); color: var(--cl-ink); font-size: 16px; line-height: 24px; }
+.cl :focus-visible { outline: 2px solid var(--cl-focus); outline-offset: 2px; }
+.cl-eyebrow { font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cl-muted); }
+.cl-num { font-variant-numeric: tabular-nums; }
+
+/* Button */
+.cl-btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--touch-min); padding: 0 var(--space-20);
+  font: 700 16px/24px var(--font-sans); border: 1.6px solid transparent; border-radius: var(--radius-0); cursor: pointer; text-decoration: none; }
+.cl-btn--primary { background: var(--cl-oxide); color: var(--cl-on-oxide); border-color: var(--cl-oxide); }
+.cl-btn--primary:hover, .cl-btn--primary:active { text-decoration: underline; text-underline-offset: 3px; }
+.cl-btn--secondary { background: transparent; color: var(--cl-ink); border-color: var(--cl-ink); }
+.cl-btn:disabled { opacity: 1; background: transparent; color: var(--cl-muted); border-color: var(--cl-muted); cursor: not-allowed; }
+
+/* Field */
+.cl-field { display: grid; gap: var(--space-5); max-width: 320px; }
+.cl-field label { font-weight: 700; font-size: 16px; }
+.cl-field .cl-hint { font-size: 14px; line-height: 20px; color: var(--cl-muted); }
+.cl-input { height: var(--touch-min); padding: 0 var(--space-10); font: 400 16px/24px var(--font-sans); font-variant-numeric: tabular-nums;
+  color: var(--cl-ink); background: var(--cl-card); border: 1.6px solid var(--cl-ink); border-radius: var(--radius-0); width: 100%; }
+
+/* Cost comparison — the itemised calculator result */
+.cl-cost { width: 100%; max-width: 560px; border-collapse: collapse; background: var(--cl-card); font-variant-numeric: tabular-nums; }
+.cl-cost th, .cl-cost td { padding: var(--space-10) var(--space-15); text-align: right; border-bottom: .9px solid var(--cl-rule); }
+.cl-cost th:first-child, .cl-cost td:first-child { text-align: left; }
+.cl-cost thead th { font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cl-muted); border-bottom: .9px solid var(--cl-ink); }
+.cl-cost .cl-keep { color: var(--cl-muted); font-weight: 400; }
+.cl-cost .cl-with { color: var(--cl-oxide); font-weight: 700; }
+.cl-cost thead th.cl-with { color: var(--cl-oxide); }
+.cl-cost tfoot td { border-top: 1.6px solid var(--cl-ink); border-bottom: 0; font-weight: 700; }
+.cl-cost tfoot td.cl-keep { color: var(--cl-muted); font-weight: 700; }
+
+/* Notice — cost and warning */
+.cl-notice { max-width: 560px; padding-top: var(--space-10); border-top: 1.6px solid var(--cl-warning); }
+.cl-notice .cl-eyebrow { color: var(--cl-warning); }
+.cl-notice p { margin: var(--space-5) 0 0; }
+
+/* Figure — both layouts inlined, one shown */
+.cl-figure { margin: var(--space-60) 0; }
+.cl-figure svg { display: block; width: 100%; height: auto; }
+.cl-figure .clf-wide { display: none; }
+@media (min-width: 720px) { .cl-figure .clf-wide { display: block; } .cl-figure .clf-narrow { display: none; } }
+
+/* Graphite band — redefine the tokens, never the components */
+.cl-band { background: var(--cl-paper); color: var(--cl-ink); padding: var(--space-40) var(--space-20); }
+.cl-band h2 { margin: 0; font-size: 30px; line-height: 36px; font-weight: 700; }
+.cl-band .cl-accent { color: var(--cl-oxide); font-size: 30px; line-height: 36px; font-weight: 700; }
+[data-theme="graphite"] .cl-btn--primary { font-size: 19px; }

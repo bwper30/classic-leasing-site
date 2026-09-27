@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import { inline } from '../lib/copy';
+import { SITE } from '../config/site';
+---
+<Base page="Complaints" path="/complaints/" fallbackTitle="Complaints">
+  <h1>Complaints</h1>
+  <p set:html={inline('{{TODO: internal complaints process — how to complain, who it goes to, response timeframe (legal-brief.md, section 4)}}')} />
+  {SITE.licensingBlock && <p>{SITE.licensingBlock}</p>}
+</Base>
