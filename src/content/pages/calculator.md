@@ -98,7 +98,8 @@ higher running costs}}**
   your salary, your employer's payroll arrangements and your circumstances. [SAV-030, Q1]
 - Tax rates and thresholds are {{TODO: financial year}}, sourced from the ATO and verified
   {{TODO: date}}. [TAX-020]
-- The residual is set at the ATO minimum for the term. [EOT-010]
+- The residual is set at the ATO minimum for the term, and GST is added when you pay it.
+  [EOT-010]
 - FBT is calculated under the statutory formula, with an employee contribution applied to
   reduce the taxable value. [TAX-010]
 - GST is claimed on packaged running costs. No GST credit arises on the car itself, because

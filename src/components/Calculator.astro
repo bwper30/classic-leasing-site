@@ -90,7 +90,7 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
           <tbody>
             <tr><th scope="row">Agreed value paid to you at the start</th><td class="cl-with" data-out="valueIn"></td></tr>
             <tr><th scope="row">Difference in car costs over the term</th><td class="cl-with" data-out="costTerm"></td></tr>
-            <tr class="obligation"><th scope="row">Residual payable at the end of the term</th><td data-out="residual"></td></tr>
+            <tr class="obligation"><th scope="row">Residual payable at the end of the term <span class="note">(incl GST)</span></th><td data-out="residual"></td></tr>
           </tbody>
           <tfoot>
             <tr><td data-out="overTermLabel">Saving over the term</td><td class="cl-with" data-out="overTerm"></td></tr>
@@ -200,7 +200,7 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
     const t1 = { running: R(s.runningGross), gst: R(-s.gstSavingNet), lease: R(s.leaseCharges), tax: R(-s.taxSaving) };
     const usedPkg = t1.running + t1.gst + t1.lease + t1.tax;
     const costTerm = (t1.running - usedPkg) * n;
-    const overTerm = R(r.agreedValue) + costTerm - R(r.residual);
+    const overTerm = R(r.agreedValue) + costTerm - R(r.residualPayable);
     $('keepRunning').textContent = fmt(t1.running);
     $('pkgRunning').textContent = fmt(t1.running);
     $('gstSaving').textContent = fmt(t1.gst);
@@ -211,7 +211,7 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
 
     $('valueIn').textContent = fmt(r.agreedValue, true);
     $('costTerm').textContent = fmt(costTerm, true);
-    $('residual').textContent = fmt(-r.residual, true);
+    $('residual').textContent = fmt(-r.residualPayable, true);
     $('overTermLabel').textContent = overTerm > 0 ? 'Saving over the term' : 'Difference over the term';
     $('overTerm').textContent = fmt(overTerm, true);
     $('perYear').textContent = fmt(overTerm / n, true);

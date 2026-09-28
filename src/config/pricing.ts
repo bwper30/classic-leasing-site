@@ -47,14 +47,13 @@ export const FEE_INCLUDES_GST: Setting<boolean> = {
   settled: false,
 };
 
-export const RESIDUAL_PAYABLE_BASIS: Setting<'as-quoted'> = {
-  value: 'as-quoted',
+export const RESIDUAL_PAYABLE_BASIS: Setting<'plus-gst' | 'as-quoted'> = {
+  value: 'plus-gst',
   basis:
-    'ASSUMPTION. The customer pays the residual at the ATO minimum percentage of the agreed ' +
-    'value, and that figure is the whole amount payable. Classic Leasing is registered for GST, ' +
-    'so a sale back to the customer may carry GST — confirm whether the residual is quoted ' +
-    'inclusive of it.',
-  settled: false,
+    'Owner, 28 Sep 2026. The residual is the ATO minimum percentage of the agreed value, ex GST. ' +
+    'The sale back to the customer is a taxable supply by Classic Leasing, so GST is added to ' +
+    'what the customer pays. The rentals still amortise to the ex-GST residual.',
+  settled: true,
 };
 
 /**

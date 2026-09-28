@@ -23,6 +23,10 @@ describe('tax', () => {
 });
 
 describe('residual and rental', () => {
+  it('adds GST to the residual the customer pays', () => {
+    const r = calculate({ salary: 160000, agreedValue: 15000, termYears: 3, running: { fuel: 3000, insurance: 1100, registration: 900, servicing: 1500, tyres: 500, maintenance: 1000 } });
+    expect(r.ok && r.residualPayable).toBeCloseTo(r.ok ? r.residual * 1.1 : 0, 6);
+  });
   it('reproduces the published minimum residual schedule', () => {
     const want = [0.65625, 0.5625, 0.46875, 0.375, 0.28125];
     want.forEach((w, i) => expect(minimumResidualFraction(i + 1)).toBeCloseTo(w, 6));
@@ -61,7 +65,7 @@ describe('the savings table', () => {
     const r = calculate(base);
     if (!r.ok) throw new Error();
     const d = r.years.reduce((s, y) => s + (y.usedKeep - y.usedPackaged), 0);
-    expect(r.agreedValue + d - r.residual).toBeCloseTo(r.netOverTerm, 6);
+    expect(r.agreedValue + d - r.residualPayable).toBeCloseTo(r.netOverTerm, 6);
   });
 });
 
@@ -93,7 +97,7 @@ describe('the comparison', () => {
 
   it('the whole-term view adds the sale price received and subtracts the residual', () => {
     const r = calculate({ ...base, termYears: 5 });
-    expect(r.ok && Math.abs(r.netOverTerm - (r.cashFlowOverTerm + r.agreedValue - r.residual)) < 1e-6).toBe(true);
+    expect(r.ok && Math.abs(r.netOverTerm - (r.cashFlowOverTerm + r.agreedValue - r.residualPayable)) < 1e-6).toBe(true);
   });
 
   it('a one-off bill costs less packaged than kept', () => {

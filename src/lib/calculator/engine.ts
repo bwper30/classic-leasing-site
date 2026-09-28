@@ -13,7 +13,7 @@
  * Both paths end with the customer owning the same car, so the net result over the term is:
  *
  *     sum over years of (take-home packaged - take-home keeping)  +  agreed value received
- *     -  residual paid at the end
+ *     -  residual paid at the end (plus GST: the sale back is a taxable supply)
  *
  * Undiscounted. Every constant comes from src/config. If any tax constant is unverified, the
  * engine refuses to produce a number (brief s5, "Tax constants").
@@ -25,7 +25,7 @@ import {
 } from '../../config/tax-fy2027';
 import {
   LEASE_RATE, BASE_FEE_PER_YEAR, VARIABLE_FEE_RATE, VARIABLE_FEE_THRESHOLD,
-  FEE_INCLUDES_GST, GST_ON_RUNNING_COSTS,
+  FEE_INCLUDES_GST, GST_ON_RUNNING_COSTS, RESIDUAL_PAYABLE_BASIS,
 } from '../../config/pricing';
 
 export const RUNNING_KEYS = ['fuel', 'insurance', 'registration', 'servicing', 'tyres', 'maintenance'] as const;
@@ -69,13 +69,14 @@ export interface Result {
   ok: true;
   years: YearResult[];
   agreedValue: number;
-  residual: number;
+  residual: number;           // ex GST: what the rentals amortise down to
+  residualPayable: number;    // what the customer pays at the end: the residual plus GST
   residualFraction: number;
   rentalPerYearExGst: number;
   leaseChargeTerm: number;    // total rentals ex GST - (agreed value - residual)
   cashFlowPerYear: number;    // steady-state take-home difference, no shock — the per-pay view
   cashFlowOverTerm: number;   // sum of yearly take-home differences (includes any shock)
-  netOverTerm: number;        // cashFlowOverTerm + agreed value received - residual paid
+  netOverTerm: number;        // cashFlowOverTerm + agreed value received - residual payable
   netPerYear: number;         // netOverTerm / years
   shockYear: number | null;
   shockEffect: { keep: number; packaged: number; differenceWithout: number; differenceWith: number } | null;
@@ -198,9 +199,10 @@ export function calculate(inp: Inputs): Result | Refusal {
     };
   }
 
-  const netOverTerm = years.reduce((s, y) => s + y.difference, 0) + inp.agreedValue - residual;
+  const residualPayable = RESIDUAL_PAYABLE_BASIS.value === 'plus-gst' ? residual * (1 + GST_RATE.value) : residual;
+  const netOverTerm = years.reduce((s, y) => s + y.difference, 0) + inp.agreedValue - residualPayable;
   return {
-    ok: true, years, agreedValue: inp.agreedValue, residual, residualFraction,
+    ok: true, years, agreedValue: inp.agreedValue, residual, residualPayable, residualFraction,
     rentalPerYearExGst, leaseChargeTerm,
     cashFlowPerYear: steady.difference,
     cashFlowOverTerm: years.reduce((s, y) => s + y.difference, 0),

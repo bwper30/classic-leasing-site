@@ -13,7 +13,7 @@ build shows them as highlighted markers.
 | Running-cost defaults: fuel 20c/km, insurance $1,100, registration $900, servicing $1,000 plus 10c/km above 10,000 km, tyres $500, non-routine maintenance $1,000; 15,000 km gives $8,000 | `src/config/calculator.ts` | Owner, 28 Sep 2026 |
 | Which figure leads the result | `src/config/calculator-basis.ts` | Decided 28 Sep 2026: the whole term |
 | Whether the $1,200 base fee is GST-inclusive | `src/config/pricing.ts` | Assumed inclusive — **blocks launch** |
-| Whether the residual is quoted inclusive of the GST on the sale back to the customer | `src/config/pricing.ts` | Assumed the residual is the whole amount payable — **blocks launch** |
+| Residual payable: ATO minimum plus GST (the sale back is a taxable supply) | `src/config/pricing.ts` | Owner, 28 Sep 2026 |
 | GST credits on insurance and registration | `src/config/pricing.ts` | Excluded (conservative) — confirm with the adviser |
 | Term options 1–5 years | `eligibility.md` TODO | **blocks launch** |
 | Trading entity, ABN, domain, email, phone, response time | `src/config/site.ts`, `contact.md` | **blocks launch** |
@@ -45,7 +45,8 @@ build shows them as highlighted markers.
   low running costs on a higher-value car can come out negative, and the calculator shows it.
 - **Lease rental:** level monthly rentals in arrears at the lease rate (12%), amortising the agreed
   value to the residual. Rental ex GST in the package (GST charged and credited to the employer).
-- **Residual:** ATO minimum for the term, TD 93/142 with an 8-year effective life.
+- **Residual:** ATO minimum for the term, TD 93/142 with an 8-year effective life, ex GST. The
+  customer pays it plus GST; the rentals amortise to the ex-GST figure.
 - **FBT:** statutory formula, 20% of the agreed value, reduced to nil by an ECM contribution. The
   employer remits GST on the contribution, so it funds the package net of one-eleventh.
 - **Base value reduction after four years:** not modelled (see `tax-fy2027.ts`).
