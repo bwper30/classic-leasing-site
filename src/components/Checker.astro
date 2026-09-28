@@ -17,7 +17,7 @@ const state = (n: number, name: string) => {
   return { h2: inline(h2), body: body.map(p => inline(p).replace(/<mark class="cl-todo"[^>]*>[\s\S]*?<\/mark>/, '<span data-reasons></span>')), cta: cta[1], href: cta[2] + '/' };
 };
 const S = [state(1, 'Looks eligible'), state(2, 'Needs a conversation'), state(3, 'Outside our criteria')];
-const q5 = q(5);
+const q4 = q(4);
 const provisional = Object.values(RULES).some(r => r.provisional);
 const thisYear = new Date().getFullYear();
 ---
@@ -36,12 +36,11 @@ const thisYear = new Date().getFullYear();
     </fieldset>
     <div class="cl-field"><label for="odometer">2. {q(2).label}</label><input class="cl-input" id="odometer" name="odometer" inputmode="numeric" required /><span class="cl-hint">{q(2).hint}</span></div>
     <div class="cl-field"><label for="value">3. {q(3).label}</label><input class="cl-input" id="value" name="value" inputmode="numeric" required /><span class="cl-hint">{q(3).hint.replace(/'/g, '’')}</span></div>
-    <div class="cl-field"><label for="running">4. {q(4).label}</label><input class="cl-input" id="running" name="running" inputmode="numeric" required /><span class="cl-hint">{q(4).hint}</span></div>
-    <div class="cl-field"><label for="term">5. {q5.label}</label>
+    <div class="cl-field"><label for="term">4. {q4.label}</label>
       <select class="cl-input" id="term" name="term">{[1, 2, 3, 4, 5].map(y => <option value={y} selected={y === 3}>{y} year{y > 1 ? 's' : ''}</option>)}</select>
     </div>
     <fieldset>
-      <legend>6. {q(6).label}</legend>
+      <legend>5. {q(5).label}</legend>
       {CONDITION_OPTIONS.map((c, i) => <label class="radio"><input type="radio" name="condition" value={c.id} checked={i === 0} /> {c.label}</label>)}
     </fieldset>
     <div class="cta-row"><button class="cl-btn cl-btn--primary" type="submit">Check your car</button></div>
@@ -71,7 +70,7 @@ const thisYear = new Date().getFullYear();
     if (!form.reportValidity()) return;
     const r = check({
       body: (form.elements.namedItem('body') as HTMLSelectElement).value,
-      year: n('year'), odometer: n('odometer'), value: n('value'), runningCost: n('running'),
+      year: n('year'), odometer: n('odometer'), value: n('value'),
       termYears: n('term'), condition: (form.querySelector('input[name=condition]:checked') as HTMLInputElement).value,
     });
     root.querySelectorAll<HTMLElement>('.result').forEach(el => {

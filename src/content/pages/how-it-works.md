@@ -21,8 +21,7 @@ with you. That value sets the lease, so it matters more than anything else in th
 
 ## H2 — 2. We buy it
 
-We pay you the agreed value and the car becomes ours for the term of the lease. [OWN-010] You
-aren't borrowing anything and nothing is being repaid. [OWN-040]
+We pay you the agreed value and the car becomes ours for the term of the lease. [OWN-010]
 
 ## H2 — 3. Your employer novates the lease
 

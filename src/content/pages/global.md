@@ -68,8 +68,7 @@ diagram of where the money goes.
 
 **Is my car eligible?**
 Title: Is your car eligible?
-Description: Six questions and about a minute. What matters is what the car costs to run
-relative to what it's worth.
+Description: Five questions and about a minute, with no details needed to get an answer.
 
 **Calculator**
 Title: What a novated lease looks like on your numbers

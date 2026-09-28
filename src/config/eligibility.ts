@@ -4,8 +4,9 @@
  * The values below are the PROPOSED starting points from 28 Sep 2026, not yet approved by the
  * owner. Every rule is marked provisional; a production build fails while any are.
  *
- * Only two rules can return "outside our criteria": the FBT car definition, and running costs
- * far below what the agreed value needs. Everything else routes to "needs a conversation".
+ * Only one rule can return "outside our criteria": the FBT car definition. Everything else routes
+ * to "needs a conversation". There is deliberately NO savings or running-cost test (owner, 28 Sep
+ * 2026): the calculator shows whether the numbers work, and the checker only screens the car.
  */
 
 export type Outcome = 'eligible' | 'conversation' | 'outside';
@@ -65,22 +66,6 @@ export const RULES = {
     provisional: true,
   } as Rule<string[]>,
 
-  /**
-   * Running costs as a share of agreed value. At or above `eligible` the car looks eligible;
-   * between `outside` and `eligible` it needs a conversation; below `outside` it is outside our
-   * criteria.
-   *
-   * Calibrated 28 Sep 2026 from the calculator engine on the per-pay (cash-flow) basis, 1-5 year
-   * terms, agreed values $8,000-$25,000. Break-even ratios: 0.80-1.00 at the 30% bracket,
-   * 0.64-0.78 at 37%, 0.51-0.63 at 45%. So 0.8 is positive at 37% and above for every term,
-   * and below 0.5 the result is negative at every bracket. Recalibrate if pricing changes.
-   */
-  runningCostRatio: {
-    value: { eligible: 0.8, outside: 0.5 },
-    onFail: 'conversation',
-    reason: 'Your running costs are low compared with what the car is worth, which is where this arrangement works least well.',
-    provisional: true,
-  } as Rule<{ eligible: number; outside: number }>,
 };
 
 export const CONDITION_OPTIONS = [

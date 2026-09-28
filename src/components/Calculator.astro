@@ -95,13 +95,13 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
 
         <table class="cl-cost bottom">
           <tbody>
-            <tr><th scope="row">Difference per pay cycle</th><td></td><td class="cl-with" data-out="perPay"></td></tr>
-            <tr><th scope="row">Difference in take-home over the term</th><td></td><td class="cl-with" data-out="cashTerm"></td></tr>
+            <tr><th scope="row">Difference in take-home pay over the term</th><td></td><td class="cl-with" data-out="cashTerm"></td></tr>
             <tr><th scope="row">Agreed value paid to you at the start</th><td></td><td class="cl-with" data-out="valueIn"></td></tr>
             <tr class="obligation"><th scope="row"><span class="cl-eyebrow warn">Obligation</span> Residual payable at the end of the term</th><td></td><td data-out="residual"></td></tr>
           </tbody>
           <tfoot>
             <tr><td>Difference over the term</td><td></td><td class="cl-with" data-out="overTerm"></td></tr>
+            <tr class="avg"><td>Averaged per pay cycle</td><td></td><td class="cl-with" data-out="perPay"></td></tr>
           </tfoot>
         </table>
 
@@ -197,7 +197,7 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
     $('contribution').textContent = fmt(s.employeeContribution);
     $('keepTH').textContent = fmt(s.keepTakeHome);
     $('pkgTH').textContent = fmt(s.packagedTakeHome);
-    $('perPay').textContent = fmt(y.cashFlowPerYear / cycles, true) + ' ' + inp.payCycle;
+    $('perPay').textContent = fmt(r.netOverTerm / (r.years.length * cycles), true) + ' ' + inp.payCycle;
     $('cashTerm').textContent = fmt(r.cashFlowOverTerm, true);
     $('valueIn').textContent = fmt(r.agreedValue, true);
     $('residual').textContent = fmt(-r.residual, true);
@@ -262,6 +262,7 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
   .cl-cost.bottom { margin-top: var(--space-30); }
   .cl-cost.bottom td:nth-child(2) { width: 0; padding: 0; }
   .cl-cost .obligation td { color: var(--cl-warning); font-weight: 700; }
+  .cl-cost tfoot tr.avg td { border-top: 0; font-weight: 400; font-size: 14px; padding-top: 0; }
   .cl-eyebrow.warn { color: var(--cl-warning); display: block; }
   .col-notes { font-size: 14px; line-height: 20px; color: var(--cl-muted); display: grid; gap: var(--space-5); margin: var(--space-10) 0 0; }
   .negative { margin-top: var(--space-30); }

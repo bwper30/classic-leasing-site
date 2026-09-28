@@ -28,8 +28,6 @@ first person or underquoting the second.
 Your lease rental is based on the agreed value of the car and a lease rate that reflects the
 cost of the funds used to buy it. [PRI-050]
 
-It isn't interest and you aren't borrowing. We own the car and we're leasing it to you. [OWN-040]
-
 The rate moves with our funding costs, so it's set out in your quote rather than here. [PRI-060]
 
 ## H2 — What we don't charge for

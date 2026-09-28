@@ -80,13 +80,10 @@ doesn't, we're happy to talk to them.
 
 ## H2 — Who this suits
 
-This works best when your car sometimes costs a lot to keep running smoothly relative to what
-it's worth. Older BMWs, Mercedes, Audis and Volkswagens are often in that position.
+This works best when your car sometimes costs a lot to keep running smoothly. Older BMWs, Mercedes, Audis and Volkswagens are often in that position.
 
 <!-- note: text references to marques are fine. Badges, logos and wordmarks are not — see the
 licensing note in 13 - Images. -->
-
-It won't suit everyone, and we'd rather tell you that early than take you through a quote.
 
 **See if it works on your numbers** → /calculator
 

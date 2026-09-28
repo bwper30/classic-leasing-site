@@ -9,10 +9,9 @@ build shows them as highlighted markers.
 | Item | Where | Status |
 |---|---|---|
 | Eligibility rules: age at lease end 20, odometer 250,000 km, agreed value $5,000–$40,000, "needs work" routes to a conversation | `src/config/eligibility.ts` | Proposed 28 Sep 2026, awaiting approval — **blocks launch** |
-| Running-cost ratio bands for the checker: 0.8 eligible, 0.5 outside | `src/config/eligibility.ts` | Calibrated from the calculator, awaiting approval — **blocks launch** |
 | Calculator defaults: salary, term, kilometres, each running cost | `src/config/calculator.ts` | Placeholders — **blocks launch** |
 | Default pay cycle (fortnightly) | `src/config/calculator.ts` | Placeholder — **blocks launch** |
-| Which figure leads the result: take-home per pay, or the whole term including the agreed value paid at the start and the residual at the end | `src/config/calculator-basis.ts` | Set to take-home per pay — **blocks launch** |
+| Which figure leads the result | `src/config/calculator-basis.ts` | Decided 28 Sep 2026: the whole term |
 | Whether the $1,200 base fee is GST-inclusive | `src/config/pricing.ts` | Assumed inclusive — **blocks launch** |
 | Whether the residual is quoted inclusive of the GST on the sale back to the customer | `src/config/pricing.ts` | Assumed the residual is the whole amount payable — **blocks launch** |
 | GST credits on insurance and registration | `src/config/pricing.ts` | Excluded (conservative) — confirm with the adviser |
@@ -31,7 +30,11 @@ build shows them as highlighted markers.
 - **The brief's rule of thumb** ("the deal works when the agreed value is at or below one year's
   running costs"; "$15,000 against $8,000 is marginally behind") matches the take-home view.
   On the whole-term view the same car is well ahead, because the $15,000 sale price counts.
-  This is why the headline basis is an owner decision.
+  The whole-term view leads (owner, 28 Sep 2026): the rentals repay the agreed value the customer
+  received, so the take-home view alone counts the return of their own money as a cost.
+- **No savings test in eligibility** (owner, 28 Sep 2026). The checker screens the car only; the
+  calculator shows whether the numbers work. Note: the result is not positive for every car —
+  low running costs on a higher-value car can come out negative, and the calculator shows it.
 - **Lease rental:** level monthly rentals in arrears at the lease rate (12%), amortising the agreed
   value to the residual. Rental ex GST in the package (GST charged and credited to the employer).
 - **Residual:** ATO minimum for the term, TD 93/142 with an 8-year effective life.

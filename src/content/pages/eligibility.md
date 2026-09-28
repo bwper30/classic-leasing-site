@@ -10,10 +10,8 @@ Is your car eligible?
 
 ## Intro
 
-Six questions. It takes about a minute and you don't have to give us your details to get an
+Five questions. It takes about a minute and you don't have to give us your details to get an
 answer.
-
-What matters most is whether the car costs a decent amount to run relative to what it's worth. [SAV-050]
 
 ---
 
@@ -28,13 +26,10 @@ Odometer reading, near enough.
 **3. Roughly what's it worth?**
 What you'd expect if you sold it privately today. A rough figure is fine.
 
-**4. What does it cost you to run in a year?**
-Fuel, servicing, tyres, registration and insurance. Include the parts you know are coming.
-
-**5. How long would you want the lease to run?**
+**4. How long would you want the lease to run?**
 {{TODO: term options — 1 to 5 years}}
 
-**6. What condition is it in?**
+**5. What condition is it in?**
 - Good, with service history
 - Sound, history is patchy
 - Needs work
@@ -90,5 +85,3 @@ time or ours. If something about the car changes, or you think we've read it wro
 
 {{TODO: eligibility criteria — vehicle age at lease end, kilometres, minimum and maximum agreed
 value, body type, condition. Render from config. Show "criteria coming soon" until settled.}}
-
-Running costs matter more than anything on that list. A car with low running costs and a high agreed value is a poor fit even when it passes every rule, and a car that costs a lot to keep on the road but isn't worth much is what this is built for. [SAV-050]

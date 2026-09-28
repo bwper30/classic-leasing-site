@@ -80,8 +80,7 @@ Lease rental and running costs paid through the arrangement, with a portion of t
 
 **H2:** On these numbers, this doesn't work for you.
 
-That happens, and it's usually one of two things. Either the car's worth more than it costs you
-to run, or the term is longer than you want to commit to.
+That happens, and it usually means the running costs are low for a car of this value.
 
 Here's what would change it: **{{TODO: rendered from the inputs — a lower agreed value, or
 higher running costs}}**

@@ -6,7 +6,6 @@ export interface Answers {
   year: number;            // year of manufacture
   odometer: number;
   value: number;           // private-sale estimate
-  runningCost: number;     // a year
   termYears: number;
   condition: string;       // CONDITION_OPTIONS id
 }
@@ -30,10 +29,6 @@ export function check(a: Answers, thisYear = new Date().getFullYear()): Check {
   if (a.value > RULES.maxAgreedValue.value) fail(RULES.maxAgreedValue.onFail, fill(RULES.maxAgreedValue.reason, RULES.maxAgreedValue.value));
   if (RULES.conditionNeedsConversation.value.includes(a.condition)) fail('conversation', RULES.conditionNeedsConversation.reason);
 
-  const ratio = a.value > 0 ? a.runningCost / a.value : Infinity;
-  const band = RULES.runningCostRatio.value;
-  if (ratio < band.outside) fail('outside', RULES.runningCostRatio.reason);
-  else if (ratio < band.eligible) fail('conversation', RULES.runningCostRatio.reason);
 
   if (outside.length) return { outcome: 'outside', reasons: outside };
   if (talk.length) return { outcome: 'conversation', reasons: talk };

@@ -37,7 +37,7 @@ marketing page goes stale between the day it's written and the day you read it.
 
 ## H2 — We set our own criteria
 
-We look at cars the mainstream providers turn away. What makes a car work here is how much it costs to run compared with what it's worth. A car that falls outside one of our
+We look at cars the mainstream providers turn away, and a car that falls outside one of our
 rules can still be worth a conversation. [ELG-010]
 
 ## H2 — The calculator shows when it doesn't work

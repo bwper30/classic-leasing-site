@@ -7,9 +7,13 @@
  * 'overTerm' — the whole term: take-home differences plus the agreed value received, less the
  *              residual. Every car that is "slightly behind" per pay can look well ahead here.
  *
- * Both are always shown as lines. This setting only chooses which one leads. OWNER TO DECIDE.
+ * Both are always shown as lines. This setting only chooses which one leads.
+ *
+ * DECIDED 28 Sep 2026 (owner): the whole term. It is the true economic comparison: the rentals
+ * repay the agreed value the customer received at the start, so counting them without that
+ * receipt treats the return of the customer's own money as a cost.
  */
 export const HEADLINE_BASIS: { value: 'cashFlow' | 'overTerm'; provisional: boolean } = {
-  value: 'cashFlow',
-  provisional: true,
+  value: 'overTerm',
+  provisional: false,
 };
