@@ -231,13 +231,12 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
 
     const shocked = withShock.shock ? calculate(withShock) : null;
     if (shocked && shocked.ok && shocked.shockEffect) {
-      const label = Math.round(shocked.netOverTerm) > 0 ? 'saving' : 'difference';
-      const hit = shocked.years[shocked.shockYear! - 1];
-      const gst = hit.gstCreditsRunning - s.gstCreditsRunning;
-      const fee = hit.feeNet - s.feeNet;
-      const tax = hit.taxSaving - s.taxSaving;
-      const feeText = Math.round(fee) > 0 ? `, and our fee on the claim adds ${fmt(fee)}` : '';
-      $('shockText').textContent = `Kept as you are, a ${fmt(withShock.shock!)} bill costs you ${fmt(shocked.shockEffect.keep)} from after-tax pay. Packaged, you save the GST (${fmt(gst)}) and the tax (${fmt(tax)})${feeText}, so it costs you about ${fmt(shocked.shockEffect.packaged)}. The ${label} over the term becomes ${fmt(shocked.netOverTerm, true)}.`;
+      // Built from the rounded figures on screen, so the sentence adds up: saving shown + bill saving.
+      const pk = Math.round(shocked.shockEffect.packaged), keep = Math.round(shocked.shockEffect.keep), total = overTerm + keep - pk;
+      const after = Math.round(total) > 0
+        ? `The total saving over the term increases to ${fmt(total)}.`
+        : `The difference over the term improves to ${fmt(total, true)}.`;
+      $('shockText').textContent = `Kept as you are, a ${fmt(withShock.shock!)} bill costs you ${fmt(keep)} from after-tax pay. Packaged, it costs you ${fmt(pk)}, saving you ${fmt(keep - pk)}. ${after}`;
     } else $('shockText').textContent = '';
 
     if (!salaryTouched) sensSalary.value = String(clamp(Math.round(inp.salary / SENSITIVITY.salary.step) * SENSITIVITY.salary.step, SENSITIVITY.salary.min, SENSITIVITY.salary.max));
