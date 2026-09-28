@@ -2,6 +2,7 @@
 :root, [data-theme="paper"] {
   --cl-paper: #F4F1EA;
   --cl-card: #FFFFFF;
+  --cl-panel: #E6E0D4;
   --cl-ink: #1C1A17;
   --cl-muted: #5A544A;
   --cl-rule: #D6D0C4;
@@ -30,6 +31,7 @@
 [data-theme="graphite"] {
   --cl-paper: #1C1A17;
   --cl-card: #1C1A17;
+  --cl-panel: #1C1A17;
   --cl-ink: #E8E3D8;
   --cl-muted: #A79F93;
   --cl-rule: #33302A;

@@ -40,9 +40,10 @@ Enter what the car costs you over a year. If you have last year's invoices, add 
 **Routine servicing**
 **Tyres**
 **Maintenance and parts**
-The bills that aren't routine. Suspension, brakes, a timing belt, the thing the specialist
-found last time. On an older car this is usually the biggest number here, and it's the one the
-arrangement is built around.
+The bills that aren't routine. Suspension, brakes, a timing belt or chain, a water pump, a
+gasket to fix an oil leak, a PCV valve. The list goes on. On an older car this can be the
+biggest cost in some years (it's still probably less than depreciation on a newer car) and this
+is what makes leasing with us more likely to work for you.
 
 ---
 
@@ -56,23 +57,25 @@ Owned outright. Everything paid from what's left after tax, GST included.
 
 Lease rental and running costs paid through the arrangement, with a portion of the deduction before tax and the running costs generally net of GST. [SAV-010, SAV-020, SAV-060]
 
-### Line items
+### Each year of the lease
 
-- Lease rental
-- Running costs packaged
-- Administration fee
-- Lease charge on the agreed value
+<!-- note: one table, two columns. The packaged column shows what changes; the last row is what
+each option takes out of disposable income. The rental and the fee are shown together as lease
+charges; the split is not disclosed. Never label the capital cost as interest. [OWN-040, PRI-050] -->
 
-<!-- note: label the capital cost "lease charge", never interest, never a rate. [OWN-040, PRI-050] -->
+- Running costs
+- GST saving on running costs (net of GST on your contribution)
+- Lease charges (excl GST)
+- Income tax and Medicare levy saving
+- **Disposable income used for car costs**
 
-- Income tax and Medicare levy
-- Employee contribution, if any
+### Over the term
+
+- Agreed value paid to you at the start
+- Difference in car costs over the term
 - **Residual payable at the end of the term** — shown as its own line [EOT-010]
-
-### The bottom line
-
-**Difference per pay cycle**
-**Difference over the term**
+- **Saving over the term** (or **Difference over the term** when negative)
+- Average per year
 
 ---
 

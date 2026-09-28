@@ -5,7 +5,7 @@
  * anonymous funnel event (see functions/api/event.ts).
  */
 import { raw, paras, fields, section, inline } from '../lib/copy';
-import { INPUTS, PAY_CYCLES, DEFAULT_PAY_CYCLE, SENSITIVITY } from '../config/calculator';
+import { INPUTS, SENSITIVITY } from '../config/calculator';
 import { INCOME_TAX_2026_27 } from '../config/tax-fy2027';
 
 const md = raw('calculator');
@@ -52,12 +52,6 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
         <input class="cl-input" id="kilometres" name="kilometres" inputmode="numeric" value={INPUTS.kilometres.default.toLocaleString('en-AU')} data-num data-min={INPUTS.kilometres.min} data-max={INPUTS.kilometres.max} />
         <span class="cl-hint">{L('Kilometres a year').hint}</span>
       </div>
-      <div class="cl-field">
-        <label for="payCycle">Pay cycle</label>
-        <select class="cl-input" id="payCycle" name="payCycle">
-          {Object.keys(PAY_CYCLES).map(k => <option value={k} selected={k === DEFAULT_PAY_CYCLE.value}>{k[0].toUpperCase() + k.slice(1)}</option>)}
-        </select>
-      </div>
 
       <h3>Running costs</h3>
       <p class="cl-hint" set:html={runIntro} />
@@ -75,33 +69,32 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
       <p class="calc-refusal" data-out="refusal" hidden></p>
       <div data-out="result">
         <table class="cl-cost">
-          <caption class="cl-eyebrow" style="text-align:left;padding-bottom:10px">Each year of the lease</caption>
+          <caption>Each year of the lease</caption>
           <thead>
             <tr><th scope="col"></th><th scope="col" class="cl-keep">Keep it as you are</th><th scope="col" class="cl-with">Packaged with us</th></tr>
           </thead>
           <tbody>
             <tr><th scope="row">Running costs</th><td class="cl-keep" data-out="keepRunning"></td><td class="cl-with" data-out="pkgRunning"></td></tr>
-            <tr><th scope="row">Lease rental</th><td class="cl-keep">—</td><td class="cl-with" data-out="rental"></td></tr>
-            <tr class="sub"><th scope="row">of which, lease charge on the agreed value</th><td class="cl-keep">—</td><td class="cl-with" data-out="leaseCharge"></td></tr>
-            <tr><th scope="row">Administration fee</th><td class="cl-keep">—</td><td class="cl-with" data-out="fee"></td></tr>
-            <tr><th scope="row">Income tax and Medicare levy</th><td class="cl-keep" data-out="keepTax"></td><td class="cl-with" data-out="pkgTax"></td></tr>
-            <tr><th scope="row">Employee contribution, after tax</th><td class="cl-keep">—</td><td class="cl-with" data-out="contribution"></td></tr>
+            <tr><th scope="row">GST saving on running costs <span class="note">(net of GST on your contribution)</span></th><td class="cl-keep">—</td><td class="cl-with" data-out="gstSaving"></td></tr>
+            <tr><th scope="row">Lease charges <span class="note">(excl GST)</span></th><td class="cl-keep">—</td><td class="cl-with" data-out="leaseCharges"></td></tr>
+            <tr><th scope="row">Income tax and Medicare levy saving</th><td class="cl-keep">—</td><td class="cl-with" data-out="taxSaving"></td></tr>
           </tbody>
           <tfoot>
-            <tr><td>Take-home pay after car costs</td><td class="cl-keep" data-out="keepTH"></td><td class="cl-with" data-out="pkgTH"></td></tr>
+            <tr><td>Disposable income used for car costs</td><td class="cl-keep" data-out="usedKeep"></td><td class="cl-with" data-out="usedPkg"></td></tr>
           </tfoot>
         </table>
         <p class="col-notes"><span><strong>Keep it as you are.</strong> <Fragment set:html={keepDesc} /></span> <span><strong>Packaged with us.</strong> <Fragment set:html={pkgDesc} /></span></p>
 
         <table class="cl-cost bottom">
+          <caption>Over the term</caption>
           <tbody>
-            <tr><th scope="row">Difference in take-home pay over the term</th><td></td><td class="cl-with" data-out="cashTerm"></td></tr>
-            <tr><th scope="row">Agreed value paid to you at the start</th><td></td><td class="cl-with" data-out="valueIn"></td></tr>
-            <tr class="obligation"><th scope="row"><span class="cl-eyebrow warn">Obligation</span> Residual payable at the end of the term</th><td></td><td data-out="residual"></td></tr>
+            <tr><th scope="row">Agreed value paid to you at the start</th><td class="cl-with" data-out="valueIn"></td></tr>
+            <tr><th scope="row">Difference in car costs over the term</th><td class="cl-with" data-out="costTerm"></td></tr>
+            <tr class="obligation"><th scope="row">Residual payable at the end of the term</th><td data-out="residual"></td></tr>
           </tbody>
           <tfoot>
-            <tr><td>Difference over the term</td><td></td><td class="cl-with" data-out="overTerm"></td></tr>
-            <tr class="avg"><td>Averaged per pay cycle</td><td></td><td class="cl-with" data-out="perPay"></td></tr>
+            <tr><td data-out="overTermLabel">Saving over the term</td><td class="cl-with" data-out="overTerm"></td></tr>
+            <tr class="avg"><td>Average per year</td><td class="cl-with" data-out="perYear"></td></tr>
           </tfoot>
         </table>
 
@@ -120,12 +113,18 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
         </div>
 
         <div class="sensitivity no-print">
-          <h3>If your running costs are different</h3>
-          <label for="sens">Running costs a year: <strong data-out="sensValue"></strong></label>
-          <input id="sens" type="range" min={SENSITIVITY.min} max={SENSITIVITY.max} step={SENSITIVITY.step} />
-          <p>Difference per year: <strong data-out="sensResult"></strong></p>
+          <h3>If your numbers are different</h3>
+          <div class="slider">
+            <label for="sens">Running costs a year: <strong data-out="sensValue"></strong></label>
+            <input id="sens" type="range" min={SENSITIVITY.min} max={SENSITIVITY.max} step={SENSITIVITY.step} value={SENSITIVITY.default} />
+          </div>
+          <div class="slider">
+            <label for="sensSalary">Salary: <strong data-out="sensSalaryValue"></strong></label>
+            <input id="sensSalary" type="range" min={SENSITIVITY.salary.min} max={SENSITIVITY.salary.max} step={SENSITIVITY.salary.step} />
+          </div>
+          <p>Average per year: <strong data-out="sensResult"></strong></p>
           <div class="scroll"><table class="cl-cost sens-table">
-            <caption class="cl-eyebrow" style="text-align:left;padding-bottom:10px">Difference per year, by salary and running costs</caption>
+            <caption>Average per year, by salary and running costs</caption>
             <thead><tr><th scope="col">Running costs</th>{SENSITIVITY.tableSalaries.map(s => <th scope="col">{money(s)} salary</th>)}</tr></thead>
             <tbody data-out="sensTable"></tbody>
           </table></div>
@@ -144,14 +143,15 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
 
 <script>
   import { calculate, netPerYearAt, breakEvenRunning, RUNNING_KEYS, type Inputs } from '../lib/calculator/engine';
-  import { PAY_CYCLES, SENSITIVITY, INPUTS } from '../config/calculator';
+  import { SENSITIVITY, fuelFor, servicingFor } from '../config/calculator';
   import { HEADLINE_BASIS } from '../config/calculator-basis';
 
   const root = document.querySelector('[data-calc]') as HTMLElement;
   const $ = (id: string) => root.querySelector(`[data-out="${id}"]`) as HTMLElement;
   const fmt = (n: number, signed = false) => {
-    const s = '$' + Math.round(Math.abs(n)).toLocaleString('en-AU');
-    return signed ? (n < 0 ? '−' + s : '+' + s) : (n < 0 ? '−' + s : s);
+    const r = Math.round(n);
+    const s = '$' + Math.abs(r).toLocaleString('en-AU');
+    return signed ? (r < 0 ? '−' + s : '+' + s) : (r < 0 ? '−' + s : s);
   };
   const num = (el: HTMLInputElement) => {
     const v = parseFloat(el.value.replace(/[^0-9.]/g, ''));
@@ -159,55 +159,68 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
     return isNaN(v) ? min : Math.min(max, Math.max(min, v));
   };
   const field = (id: string) => root.querySelector('#' + id) as HTMLInputElement;
-  const sens = field('sens') as HTMLInputElement;
-  let sensTouched = false, started = false, reported = '';
+  const sens = field('sens'), sensSalary = field('sensSalary');
+  const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+  // Fuel and servicing follow the kilometres until the customer types over them.
+  const typedOver = new Set<string>();
+  let salaryTouched = false, started = false, reported = '';
 
   function event(name: string) {
     try { navigator.sendBeacon?.('/api/event', JSON.stringify({ e: name })); } catch {}
   }
 
-  function read(): Inputs & { payCycle: keyof typeof PAY_CYCLES } {
+  function read(): Inputs {
     const running = Object.fromEntries(RUNNING_KEYS.map(k => [k, num(field(k))])) as Inputs['running'];
     return {
       salary: num(field('salary')), agreedValue: num(field('agreedValue')),
       termYears: +(field('termYears') as any).value, running, shock: num(field('shock')),
-      payCycle: (field('payCycle') as any).value,
     };
   }
 
+  function followKilometres() {
+    const km = num(field('kilometres'));
+    if (!typedOver.has('fuel')) field('fuel').value = fmt(fuelFor(km));
+    if (!typedOver.has('servicing')) field('servicing').value = fmt(servicingFor(km));
+  }
+
   function render() {
-    const inp = read();
+    const withShock = read();
+    const inp = { ...withShock, shock: 0 };   // the main result excludes the unexpected bill
     const total = RUNNING_KEYS.reduce((s, k) => s + inp.running[k], 0);
     $('runTotal').textContent = fmt(total);
     try { sessionStorage.setItem('cl-calc', JSON.stringify({ running: fmt(total) })); } catch {}
     const r = calculate(inp);
     if (!r.ok) { $('refusal').textContent = r.reason; $('refusal').hidden = false; $('result').hidden = true; return; }
     $('refusal').hidden = true; $('result').hidden = false;
-    const y = calculate({ ...inp, shock: 0 }) as any;
-    const s = y.years[0];
-    const cycles = PAY_CYCLES[inp.payCycle];
-    const leaseChargeYear = r.leaseChargeTerm / r.years.length;
-    $('keepRunning').textContent = fmt(s.runningGross);
-    $('pkgRunning').textContent = fmt(s.runningGross - s.gstCreditsRunning);
-    $('rental').textContent = fmt(s.rentalExGst);
-    $('leaseCharge').textContent = fmt(leaseChargeYear);
-    $('fee').textContent = fmt(s.feeNet);
-    $('keepTax').textContent = fmt(s.keepTax);
-    $('pkgTax').textContent = fmt(s.packagedTax);
-    $('contribution').textContent = fmt(s.employeeContribution);
-    $('keepTH').textContent = fmt(s.keepTakeHome);
-    $('pkgTH').textContent = fmt(s.packagedTakeHome);
-    $('perPay').textContent = fmt(r.netOverTerm / (r.years.length * cycles), true) + ' ' + inp.payCycle;
-    $('cashTerm').textContent = fmt(r.cashFlowOverTerm, true);
-    $('valueIn').textContent = fmt(r.agreedValue, true);
-    $('residual').textContent = fmt(-r.residual, true);
-    $('overTerm').textContent = fmt(r.netOverTerm, true);
+    const n = r.years.length;
+    const s = r.years[0];
 
-    const headline = HEADLINE_BASIS.value === 'cashFlow' ? y.cashFlowPerYear : r.netOverTerm;
+    // Every total shown is the sum of the rounded lines above it, so the tables add up on screen.
+    const R = (x: number) => Math.round(x);
+    const t1 = { running: R(s.runningGross), gst: R(-s.gstSavingNet), lease: R(s.leaseCharges), tax: R(-s.taxSaving) };
+    const usedPkg = t1.running + t1.gst + t1.lease + t1.tax;
+    const costTerm = (t1.running - usedPkg) * n;
+    const overTerm = R(r.agreedValue) + costTerm - R(r.residual);
+    $('keepRunning').textContent = fmt(t1.running);
+    $('pkgRunning').textContent = fmt(t1.running);
+    $('gstSaving').textContent = fmt(t1.gst);
+    $('leaseCharges').textContent = fmt(t1.lease);
+    $('taxSaving').textContent = fmt(t1.tax);
+    $('usedKeep').textContent = fmt(t1.running);
+    $('usedPkg').textContent = fmt(usedPkg);
+
+    $('valueIn').textContent = fmt(r.agreedValue, true);
+    $('costTerm').textContent = fmt(costTerm, true);
+    $('residual').textContent = fmt(-r.residual, true);
+    $('overTermLabel').textContent = overTerm > 0 ? 'Saving over the term' : 'Difference over the term';
+    $('overTerm').textContent = fmt(overTerm, true);
+    $('perYear').textContent = fmt(overTerm / n, true);
+
+    const headline = HEADLINE_BASIS.value === 'cashFlow' ? r.cashFlowPerYear : r.netOverTerm;
     const neg = headline < 0;
     $('negative').hidden = !neg;
     if (neg) {
-      const be = breakEvenRunning({ ...inp, shock: 0 }, inp.salary, HEADLINE_BASIS.value);
+      const be = breakEvenRunning(inp, inp.salary, HEADLINE_BASIS.value);
       let lo = 0, hi = inp.agreedValue;
       for (let k = 0; k < 40; k++) { const m = (lo + hi) / 2; const v = netPerYearAt({ ...inp, agreedValue: m }, total, inp.salary, HEADLINE_BASIS.value)!; if (v > 0) lo = m; else hi = m; }
       $('whatWouldChange').textContent =
@@ -216,25 +229,30 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
     const tag = neg ? 'calc_negative' : 'calc_positive';
     if (started && reported !== tag) { event(tag); reported = tag; }
 
-    if (r.shockEffect) {
-      $('shockYear').textContent = String(r.shockYear);
-      $('shockText').textContent = `Kept as you are, a ${fmt(inp.shock!)} bill costs you ${fmt(r.shockEffect.keep)} from after-tax pay. Packaged, it costs you about ${fmt(r.shockEffect.packaged)} in take-home pay that year.`;
-    } else { $('shockYear').textContent = String(Math.ceil(inp.termYears / 2)); $('shockText').textContent = ''; }
+    const shocked = withShock.shock ? calculate(withShock) : null;
+    $('shockYear').textContent = String(Math.ceil(n / 2));
+    if (shocked && shocked.ok && shocked.shockEffect) {
+      const label = Math.round(shocked.netOverTerm) > 0 ? 'saving' : 'difference';
+      $('shockText').textContent = `Kept as you are, a ${fmt(withShock.shock!)} bill costs you ${fmt(shocked.shockEffect.keep)} from after-tax pay. Packaged, it costs you about ${fmt(shocked.shockEffect.packaged)}, so the ${label} over the term becomes ${fmt(shocked.netOverTerm, true)}.`;
+    } else $('shockText').textContent = '';
 
-    if (!sensTouched) sens.value = String(Math.min(SENSITIVITY.max, Math.max(SENSITIVITY.min, total)));
-    const sv = +sens.value;
+    if (!salaryTouched) sensSalary.value = String(clamp(Math.round(inp.salary / SENSITIVITY.salary.step) * SENSITIVITY.salary.step, SENSITIVITY.salary.min, SENSITIVITY.salary.max));
+    const sv = +sens.value, ss = +sensSalary.value;
     $('sensValue').textContent = fmt(sv);
-    $('sensResult').textContent = fmt(netPerYearAt(inp, sv, inp.salary, HEADLINE_BASIS.value)!, true);
+    $('sensSalaryValue').textContent = fmt(ss);
+    $('sensResult').textContent = fmt(netPerYearAt(inp, sv, ss, HEADLINE_BASIS.value)!, true);
     $('sensTable').innerHTML = SENSITIVITY.tableRunningCosts.map(rc =>
       `<tr><th scope="row">${fmt(rc)}</th>${SENSITIVITY.tableSalaries.map(sal => `<td>${fmt(netPerYearAt(inp, rc, sal, HEADLINE_BASIS.value)!, true)}</td>`).join('')}</tr>`).join('');
     $('basisNote').textContent = HEADLINE_BASIS.value === 'cashFlow'
-      ? 'The difference per year compares take-home pay only. The agreed value we pay you at the start and the residual you pay at the end are shown separately.'
-      : 'The difference per year includes the agreed value we pay you at the start and the residual you pay at the end, spread over the term.';
+      ? 'The average per year compares take-home pay only. The agreed value we pay you at the start and the residual you pay at the end are shown separately.'
+      : 'The saving over the term, and the average per year, include the agreed value we pay you at the start and the residual you pay at the end. The unexpected bill is shown on its own and left out of both.';
   }
 
   root.addEventListener('input', e => {
-    const t = e.target as HTMLElement;
-    if (t === sens) sensTouched = true;
+    const t = e.target as HTMLInputElement;
+    if (t === sensSalary) salaryTouched = true;
+    if (t.id === 'fuel' || t.id === 'servicing') typedOver.add(t.id);
+    if (t.id === 'kilometres') followKilometres();
     if (!started) { started = true; event('calc_start'); }
     render();
   });
@@ -248,8 +266,10 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
 
 <style>
   .calc-grid { display: grid; gap: var(--space-40); }
+  @media (max-width: 999px) { .calc-inputs { margin: 0 calc(-1 * var(--space-20)); } }
   @media (min-width: 1000px) { .calc-grid { grid-template-columns: 340px 1fr; } }
-  .calc-inputs { display: grid; gap: var(--space-20); align-content: start; }
+  .calc-inputs { display: grid; gap: var(--space-20); align-content: start; align-self: start; background: var(--cl-panel); padding: var(--space-20); }
+  .calc-inputs .cl-input { background: var(--cl-card); }
   .calc-inputs .cl-field { max-width: none; }
   .calc-inputs h3 { margin: var(--space-10) 0 0; }
   .calc-inputs p { margin: 0; }
@@ -258,16 +278,15 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
   .calc-result .cl-cost { max-width: none; }
   .scroll { overflow-x: auto; }
   .calc-result th[scope="row"] { font-weight: 400; text-align: left; }
-  .cl-cost tr.sub th, .cl-cost tr.sub td { font-size: 14px; color: var(--cl-muted); padding-top: 0; }
+  .calc-result th .note { color: var(--cl-muted); font-size: 14px; }
   .cl-cost.bottom { margin-top: var(--space-30); }
-  .cl-cost.bottom td:nth-child(2) { width: 0; padding: 0; }
   .cl-cost .obligation td { color: var(--cl-warning); font-weight: 700; }
-  .cl-cost tfoot tr.avg td { border-top: 0; font-weight: 400; font-size: 14px; padding-top: 0; }
-  .cl-eyebrow.warn { color: var(--cl-warning); display: block; }
+  .cl-cost tfoot tr.avg td { border-top: 0; font-weight: 400; padding-top: 0; }
   .col-notes { font-size: 14px; line-height: 20px; color: var(--cl-muted); display: grid; gap: var(--space-5); margin: var(--space-10) 0 0; }
   .negative { margin-top: var(--space-30); }
   .negative h2 { margin-top: var(--space-5); }
   .shock, .sensitivity { margin-top: var(--space-40); }
+  .sensitivity .slider { display: grid; margin-top: var(--space-15); }
   .sensitivity input[type=range] { width: 100%; max-width: 560px; min-height: 44px; accent-color: var(--cl-ink); }
   .sens-table { margin-top: var(--space-15); }
   .assumptions { margin-top: var(--space-40); border-top: .9px solid var(--cl-rule); padding-top: var(--space-15); }
@@ -280,5 +299,5 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
   @media (max-width: 600px) {
     .calc-result .cl-cost th, .calc-result .cl-cost td { padding: var(--space-10) 6px; font-size: 14px; }
   }
-  @media print { .calc-grid { display: block; } }
+  @media print { .calc-grid { display: block; } .calc-inputs { background: none; } }
 </style>

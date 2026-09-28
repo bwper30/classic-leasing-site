@@ -24,7 +24,9 @@
 .cl-cost { width: 100%; max-width: 560px; border-collapse: collapse; background: var(--cl-card); font-variant-numeric: tabular-nums; }
 .cl-cost th, .cl-cost td { padding: var(--space-10) var(--space-15); text-align: right; border-bottom: .9px solid var(--cl-rule); }
 .cl-cost th:first-child, .cl-cost td:first-child { text-align: left; }
-.cl-cost thead th { font-size: 11px; line-height: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cl-muted); border-bottom: .9px solid var(--cl-ink); }
+.cl-cost thead th { font-size: 16px; line-height: 24px; font-weight: 700; color: var(--cl-ink); border-bottom: .9px solid var(--cl-ink); }
+.cl-cost thead th.cl-keep { color: var(--cl-muted); font-weight: 700; }
+.cl-cost caption { caption-side: top; text-align: left; font-size: 17px; line-height: 24px; font-weight: 700; color: var(--cl-ink); padding-bottom: var(--space-10); }
 .cl-cost .cl-keep { color: var(--cl-muted); font-weight: 400; }
 .cl-cost .cl-with { color: var(--cl-oxide); font-weight: 700; }
 .cl-cost thead th.cl-with { color: var(--cl-oxide); }

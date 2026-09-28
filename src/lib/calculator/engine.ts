@@ -56,6 +56,13 @@ export interface YearResult {
   packagedTax: number;
   packagedTakeHome: number;   // salary - pre-tax - tax - post-tax contribution
   difference: number;         // packaged - keep; positive means better off packaged
+  // the savings view (calculator table 1). All per year, all reconcile exactly:
+  //   usedPackaged = running - gstSavingNet + leaseCharges - taxSaving
+  gstSavingNet: number;       // GST credits on running costs, less the GST remitted on the employee contribution
+  leaseCharges: number;       // lease rental plus administration fee, both ex GST (split not disclosed)
+  taxSaving: number;          // income tax and Medicare levy, kept less packaged
+  usedKeep: number;           // disposable (after-tax) income spent on the car, kept as you are
+  usedPackaged: number;       // disposable income given up for the car, packaged
 }
 
 export interface Result {
@@ -144,7 +151,12 @@ export function yearResult(inp: Inputs, running: RunningCosts, rentalExGst: numb
   const packagedTax = incomeTax(S - preTaxDeduction);
   const packagedTakeHome = S - preTaxDeduction - packagedTax - employeeContribution;
 
+  const taxSaving = keepTax - packagedTax;
+  const gstSavingNet = gstCreditsRunning - (employeeContribution - contributionNet);
+  const leaseCharges = rentalExGst + feeNet;
+  const usedPackaged = preTaxDeduction + employeeContribution - taxSaving;
   return {
+    gstSavingNet, leaseCharges, taxSaving, usedKeep: R, usedPackaged,
     year, runningGross: R, keepTax, keepTakeHome,
     rentalExGst, gstCreditsRunning, feeGross, feeNet,
     employeeContribution, preTaxDeduction, packagedTax, packagedTakeHome,

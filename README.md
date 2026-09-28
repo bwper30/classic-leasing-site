@@ -28,7 +28,7 @@ Every number lives in `src/config/`:
 |---|---|
 | `pricing.ts` | Lease rate, base and variable fee, GST treatment of costs |
 | `tax-fy2027.ts` | Tax, Medicare, FBT, residual and GST constants, each with an ATO source and date |
-| `calculator.ts` | Calculator defaults, limits, pay cycles, the sensitivity table |
+| `calculator.ts` | Calculator defaults, per-km rules, limits, the two what-if sliders and their table |
 | `calculator-basis.ts` | Which result leads: take-home per pay, or the whole term |
 | `eligibility.ts` | Every eligibility rule and its reason |
 | `site.ts` | Business name, ABN, contact details, licensing block |

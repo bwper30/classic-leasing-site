@@ -9,13 +9,12 @@ build shows them as highlighted markers.
 | Item | Where | Status |
 |---|---|---|
 | Eligibility rules: age at lease end 20, odometer 250,000 km, agreed value $5,000–$40,000, "needs work" routes to a conversation | `src/config/eligibility.ts` | Proposed 28 Sep 2026, awaiting approval — **blocks launch** |
-| Calculator defaults: salary, term, kilometres, each running cost | `src/config/calculator.ts` | Placeholders — **blocks launch** |
-| Default pay cycle (fortnightly) | `src/config/calculator.ts` | Placeholder — **blocks launch** |
+| Calculator defaults: salary ($160,000) and term (3 years) | `src/config/calculator.ts` | Placeholders — **blocks launch** |
+| Running-cost defaults: fuel 20c/km, insurance $1,100, registration $900, servicing $1,000 plus 10c/km above 10,000 km, tyres $500, maintenance $2,000; 12,000 km gives $8,100 | `src/config/calculator.ts` | Owner, 28 Sep 2026 (12,000 km chosen to meet the ~$8,000 target) |
 | Which figure leads the result | `src/config/calculator-basis.ts` | Decided 28 Sep 2026: the whole term |
 | Whether the $1,200 base fee is GST-inclusive | `src/config/pricing.ts` | Assumed inclusive — **blocks launch** |
 | Whether the residual is quoted inclusive of the GST on the sale back to the customer | `src/config/pricing.ts` | Assumed the residual is the whole amount payable — **blocks launch** |
 | GST credits on insurance and registration | `src/config/pricing.ts` | Excluded (conservative) — confirm with the adviser |
-| Kilometres: collected but do not change the result | `src/config/calculator.ts` | Keep for the quote, or drop the input |
 | Term options 1–5 years | `eligibility.md` TODO | **blocks launch** |
 | Trading entity, ABN, domain, email, phone, response time | `src/config/site.ts`, `contact.md` | **blocks launch** |
 
@@ -24,9 +23,17 @@ build shows them as highlighted markers.
 - **Comparison:** keeping the car and paying every running cost from after-tax pay, against
   packaging it — pre-tax deduction plus an ECM post-tax contribution, with GST credits on
   eligible running costs, the lease rental and the fee.
-- **Both views are shown.** The difference in take-home pay (per pay and over the term), and the
-  whole-term result, which adds the agreed value paid to the customer at the start and subtracts
-  the residual paid at the end. Undiscounted.
+- **Two tables.** Each year: running costs, the net GST saving, lease charges (rental and fee
+  together, ex GST; the split is not disclosed) and the tax saving, ending in the disposable
+  income each option uses. Over the term: the agreed value in, the yearly difference times the
+  term, the residual out, the result and its average per year. Undiscounted. Every total shown is
+  the sum of the rounded lines above it.
+- **The unexpected bill** is left out of both tables and shown on its own with its effect on the
+  over-term result, so the second table is always the first times the term.
+- **Kilometres** set the default fuel and routine servicing, until the customer types over them.
+  They do not change FBT (statutory formula, flat 20%).
+- **Sliders:** running costs $4,000–$12,000 (default $8,000) and salary $60,000–$300,000 (follows
+  the salary input until moved). Between them they reproduce every cell of the table.
 - **The brief's rule of thumb** ("the deal works when the agreed value is at or below one year's
   running costs"; "$15,000 against $8,000 is marginally behind") matches the take-home view.
   On the whole-term view the same car is well ahead, because the $15,000 sale price counts.
@@ -69,12 +76,9 @@ build shows them as highlighted markers.
 These strings are not in the copy deck and need the owner's review against CL-02a and the claims
 register before launch:
 
-- Calculator: "Pay cycle", "Each year of the lease", "of which, lease charge on the agreed value",
-  "Employee contribution, after tax", "Take-home pay after car costs", "Difference in take-home
-  over the term", "Agreed value paid to you at the start", "Obligation", "Difference over the
-  term", "An unexpected bill", the unexpected-bill sentence, "If your running costs are
-  different", "Difference per year", the table caption, the basis note in the assumptions list,
-  "Print or save this result", and the "what would change it" sentence.
+- Calculator: the table captions, the unexpected-bill sentence, "If your numbers are different",
+  the slider labels, the basis note in the assumptions list, "Print or save this result", and
+  the "what would change it" sentence. (The table line labels are the owner's, 28 Sep 2026.)
 - Eligibility checker: "Make and model", "Year", "Type", the four body-type options, each rule's
   reason, and the four-line criteria list.
 - Contact: the "Check this:" prefix on field errors (from the design system's Field guidance).

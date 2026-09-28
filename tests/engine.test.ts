@@ -49,6 +49,22 @@ describe('fee', () => {
   });
 });
 
+describe('the savings table', () => {
+  it('reconciles exactly: running - GST saving + lease charges - tax saving = income used', () => {
+    const r = calculate(base);
+    if (!r.ok) throw new Error();
+    const y = r.years[0];
+    expect(y.runningGross - y.gstSavingNet + y.leaseCharges - y.taxSaving).toBeCloseTo(y.usedPackaged, 6);
+    expect(y.usedKeep - y.usedPackaged).toBeCloseTo(y.difference, 6);
+  });
+  it('table 2 adds up: value in + term car-cost difference - residual = saving', () => {
+    const r = calculate(base);
+    if (!r.ok) throw new Error();
+    const d = r.years.reduce((s, y) => s + (y.usedKeep - y.usedPackaged), 0);
+    expect(r.agreedValue + d - r.residual).toBeCloseTo(r.netOverTerm, 6);
+  });
+});
+
 describe('the comparison', () => {
   it('shows every mandatory line and a residual', () => {
     const r = calculate(base);
