@@ -18,14 +18,14 @@ export const INPUTS: Record<string, InputSpec> = {
   salary:       { default: 160000, min: 60000,  max: 600000, step: 1000, provisional: true },
   agreedValue:  { default: 15000,  min: 3000,   max: 80000,  step: 500,  provisional: false }, // brief: "around $15,000 — the expected average"
   termYears:    { default: 3,      min: 1,      max: 5,      step: 1,    provisional: true },
-  // Owner, 28 Sep 2026: defaults should total about $8,000 a year. 12,000 km gives $8,100.
-  kilometres:   { default: 12000,  min: 0,      max: 80000,  step: 1000, provisional: false },
-  fuel:         { default: 2400,   min: 0,      max: 15000,  step: 50,   provisional: false }, // follows kilometres, see PER_KM
+  // Owner, 28 Sep 2026: 15,000 km, running costs total $8,000 a year.
+  kilometres:   { default: 15000,  min: 0,      max: 80000,  step: 1000, provisional: false },
+  fuel:         { default: 3000,   min: 0,      max: 15000,  step: 50,   provisional: false }, // follows kilometres, see PER_KM
   insurance:    { default: 1100,   min: 0,      max: 10000,  step: 50,   provisional: false },
   registration: { default: 900,    min: 0,      max: 5000,   step: 50,   provisional: false }, // insurance + registration = $2,000
-  servicing:    { default: 1200,   min: 0,      max: 10000,  step: 50,   provisional: false }, // follows kilometres, see PER_KM
+  servicing:    { default: 1500,   min: 0,      max: 10000,  step: 50,   provisional: false }, // follows kilometres, see PER_KM
   tyres:        { default: 500,    min: 0,      max: 5000,   step: 50,   provisional: false },
-  maintenance:  { default: 2000,   min: 0,      max: 30000,  step: 50,   provisional: false },
+  maintenance:  { default: 1000,   min: 0,      max: 30000,  step: 50,   provisional: false },
   shock:        { default: 4000,   min: 0,      max: 30000,  step: 250,  provisional: false }, // brief: "defaulting to around $4,000"
 };
 

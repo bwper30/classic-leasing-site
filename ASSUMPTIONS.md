@@ -10,7 +10,7 @@ build shows them as highlighted markers.
 |---|---|---|
 | Eligibility rules: age at lease end 20, odometer 250,000 km, agreed value $5,000–$40,000, "needs work" routes to a conversation | `src/config/eligibility.ts` | Proposed 28 Sep 2026, awaiting approval — **blocks launch** |
 | Calculator defaults: salary ($160,000) and term (3 years) | `src/config/calculator.ts` | Placeholders — **blocks launch** |
-| Running-cost defaults: fuel 20c/km, insurance $1,100, registration $900, servicing $1,000 plus 10c/km above 10,000 km, tyres $500, maintenance $2,000; 12,000 km gives $8,100 | `src/config/calculator.ts` | Owner, 28 Sep 2026 (12,000 km chosen to meet the ~$8,000 target) |
+| Running-cost defaults: fuel 20c/km, insurance $1,100, registration $900, servicing $1,000 plus 10c/km above 10,000 km, tyres $500, non-routine maintenance $1,000; 15,000 km gives $8,000 | `src/config/calculator.ts` | Owner, 28 Sep 2026 |
 | Which figure leads the result | `src/config/calculator-basis.ts` | Decided 28 Sep 2026: the whole term |
 | Whether the $1,200 base fee is GST-inclusive | `src/config/pricing.ts` | Assumed inclusive — **blocks launch** |
 | Whether the residual is quoted inclusive of the GST on the sale back to the customer | `src/config/pricing.ts` | Assumed the residual is the whole amount payable — **blocks launch** |
@@ -28,7 +28,8 @@ build shows them as highlighted markers.
   income each option uses. Over the term: the agreed value in, the yearly difference times the
   term, the residual out, the result and its average per year. Undiscounted. Every total shown is
   the sum of the rounded lines above it.
-- **The unexpected bill** is left out of both tables and shown on its own with its effect on the
+- **The unexpected bill** is treated as non-routine maintenance in the middle year: GST credit, then
+  the tax saving, less our 10% variable fee on claims above $6,000 a year. It is left out of both tables and shown on its own with its effect on the
   over-term result, so the second table is always the first times the term.
 - **Kilometres** set the default fuel and routine servicing, until the customer types over them.
   They do not change FBT (statutory formula, flat 20%).

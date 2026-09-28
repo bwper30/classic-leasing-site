@@ -37,9 +37,9 @@ Enter what the car costs you over a year. If you have last year's invoices, add 
 **Fuel**
 **Insurance**
 **Registration**
-**Routine servicing**
 **Tyres**
-**Maintenance and parts**
+**Routine servicing**
+**Non-routine maintenance**
 The bills that aren't routine. Suspension, brakes, a timing belt or chain, a water pump, a
 gasket to fix an oil leak, a PCV valve. The list goes on. On an older car this can be the
 biggest cost in some years (it's still probably less than depreciation on a newer car) and this

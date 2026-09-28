@@ -22,7 +22,7 @@ const verified = new Date(INCOME_TAX_2026_27.verifiedOn + 'T00:00:00').toLocaleD
 const assumptions = section(md, 'Assumptions panel').split(/\n(?=- )/).map(s => s.replace(/^- /, '').replace(/\n\s*/g, ' ').trim()).filter(Boolean)
   .map(s => s.replace('{{TODO: financial year}}', '2026–27').replace('{{TODO: date}}', verified)).map(inline);
 const disclaimer = paras(md, 'Disclaimer');
-const RUN = [['fuel', 'Fuel'], ['insurance', 'Insurance'], ['registration', 'Registration'], ['servicing', 'Routine servicing'], ['tyres', 'Tyres'], ['maintenance', 'Maintenance and parts']] as const;
+const RUN = [['fuel', 'Fuel'], ['insurance', 'Insurance'], ['registration', 'Registration'], ['tyres', 'Tyres'], ['servicing', 'Routine servicing'], ['maintenance', 'Non-routine maintenance']] as const;
 const hint = (label: string) => runFields.find(x => x.label === label)?.hint;
 const money = (n: number) => '$' + n.toLocaleString('en-AU');
 ---
@@ -106,7 +106,7 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
         <div class="shock no-print">
           <h3>An unexpected bill</h3>
           <div class="cl-field">
-            <label for="shock">A one-off bill in year <span data-out="shockYear"></span></label>
+            <label for="shock">A one-off bill during the lease term</label>
             <input class="cl-input" id="shock" name="shock" inputmode="numeric" value={money(INPUTS.shock.default)} data-num data-min={INPUTS.shock.min} data-max={INPUTS.shock.max} />
           </div>
           <p data-out="shockText"></p>
@@ -230,10 +230,14 @@ const money = (n: number) => '$' + n.toLocaleString('en-AU');
     if (started && reported !== tag) { event(tag); reported = tag; }
 
     const shocked = withShock.shock ? calculate(withShock) : null;
-    $('shockYear').textContent = String(Math.ceil(n / 2));
     if (shocked && shocked.ok && shocked.shockEffect) {
       const label = Math.round(shocked.netOverTerm) > 0 ? 'saving' : 'difference';
-      $('shockText').textContent = `Kept as you are, a ${fmt(withShock.shock!)} bill costs you ${fmt(shocked.shockEffect.keep)} from after-tax pay. Packaged, it costs you about ${fmt(shocked.shockEffect.packaged)}, so the ${label} over the term becomes ${fmt(shocked.netOverTerm, true)}.`;
+      const hit = shocked.years[shocked.shockYear! - 1];
+      const gst = hit.gstCreditsRunning - s.gstCreditsRunning;
+      const fee = hit.feeNet - s.feeNet;
+      const tax = hit.taxSaving - s.taxSaving;
+      const feeText = Math.round(fee) > 0 ? `, and our fee on the claim adds ${fmt(fee)}` : '';
+      $('shockText').textContent = `Kept as you are, a ${fmt(withShock.shock!)} bill costs you ${fmt(shocked.shockEffect.keep)} from after-tax pay. Packaged, you save the GST (${fmt(gst)}) and the tax (${fmt(tax)})${feeText}, so it costs you about ${fmt(shocked.shockEffect.packaged)}. The ${label} over the term becomes ${fmt(shocked.netOverTerm, true)}.`;
     } else $('shockText').textContent = '';
 
     if (!salaryTouched) sensSalary.value = String(clamp(Math.round(inp.salary / SENSITIVITY.salary.step) * SENSITIVITY.salary.step, SENSITIVITY.salary.min, SENSITIVITY.salary.max));
